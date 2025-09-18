@@ -64,8 +64,8 @@ En `package.json`:
 ## 🔒 Husky + lint-staged
 
 - `.husky/pre-commit` contiene:
-  ```bash
-  npx lint-staged
+```bash
+    npx lint-staged
 ````
 
 * Esto significa que **antes de cada commit**, solo los archivos *staged* (`.ts`, `.html`, `.scss`) se pasan por:
@@ -77,7 +77,7 @@ Así se asegura consistencia de estilo sin penalizar con un lint completo.
 
 Si se quisiera saltar el hook porque se va con prisas:
 ```bash
-  git commit -m "WIP" -n    # -n = --no-verify (salta Husky)
+    git commit -m "WIP" -n    # -n = --no-verify (salta Husky)
 ````
 
 ---
