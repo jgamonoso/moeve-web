@@ -1,0 +1,4 @@
+[
+  { "id":"t1","title":"Seguridad y Compliance","durationMins":30,"completed":false,"externalUrl":"https://successfactors.example.com/training/123" },
+  { "id":"t2","title":"Políticas de Empresa","durationMins":20,"completed":true,"externalUrl":"https://successfactors.example.com/training/456" }
+]

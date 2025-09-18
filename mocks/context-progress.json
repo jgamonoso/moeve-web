@@ -1,0 +1,12 @@
+{
+  "molecules": { "value": 2, "total": 5 },
+  "percent": 46,
+  "remainingMinutes": 75,
+  "profile": "newHire",
+  "recommendation": { "nextStationId": "culture", "reason": "Contenido prioritario para nuevas incorporaciones" },
+  "stations": [
+    { "id":"welcome","title":"Bienvenida","percent":100,"completedModules":4,"totalModules":4,"durationMins":8,"suggestedOrder":1,"badges":[{"type":"priority","label":"Prioritario"}] },
+    { "id":"culture","title":"Cultura","percent":25,"completedModules":1,"totalModules":4,"durationMins":15,"suggestedOrder":2 },
+    { "id":"it-setup","title":"IT Setup","percent":0,"completedModules":0,"totalModules":3,"durationMins":12,"suggestedOrder":3 }
+  ]
+}
