@@ -20,7 +20,7 @@ El objetivo es guiar a los nuevos empleados a través de un recorrido gamificado
 ---
 
 ## 📂 Estructura del proyecto
-
+```bash
 src/app
 ├─ app.routes.ts                # Definición de rutas principales
 ├─ app.config.ts                # Configuración global: router, http, NgRx store
@@ -43,6 +43,7 @@ src/app
 │   └─ (future: auth, loading)  # Login simulado y Splash screen
 │
 └─ shared/                      # (por crear) componentes reutilizables
+```
 
 ---
 
