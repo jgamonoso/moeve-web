@@ -22,8 +22,6 @@ El objetivo es guiar a los nuevos empleados a través de un recorrido gamificado
 
 ## 📂 Estructura del proyecto
 
-```
-
 src/app
 ├─ app.routes.ts                # Definición de rutas principales
 ├─ app.config.ts                # Configuración global: router, http, NgRx store
@@ -46,8 +44,6 @@ src/app
 │   └─ (future: auth, loading)  # Login simulado y Splash screen
 │
 └─ shared/                      # (por crear) componentes reutilizables
-
-````
 
 ---
 
@@ -78,6 +74,11 @@ En `package.json`:
   * `prettier -w`
 
 Así se asegura consistencia de estilo sin penalizar con un lint completo.
+
+Si se quisiera saltar el hook porque se va con prisas:
+```bash
+  git commit -m "WIP" -n    # -n = --no-verify (salta Husky)
+````
 
 ---
 
