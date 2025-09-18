@@ -16,7 +16,7 @@
           autocomplete="username"
           formControlName="username"
           [class.invalid]="f.username.invalid && (f.username.touched || f.username.dirty)"
-          placeholder="p.ej. j.doe"
+          placeholder="p.ej. javier.sanchez@moeve.com"
         />
         <small *ngIf="f.username.invalid && (f.username.touched || f.username.dirty)">
           Introduce tu usuario
@@ -30,7 +30,7 @@
           autocomplete="current-password"
           formControlName="password"
           [class.invalid]="f.password.invalid && (f.password.touched || f.password.dirty)"
-          placeholder="••••••••"
+          placeholder=""
         />
         <small *ngIf="f.password.invalid && (f.password.touched || f.password.dirty)">
           Introduce tu contraseña

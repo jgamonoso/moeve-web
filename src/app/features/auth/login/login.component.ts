@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LocalFlagsService } from '../../../core/services/flags/local-flags.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
