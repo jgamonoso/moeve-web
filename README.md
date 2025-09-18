@@ -1,4 +1,3 @@
-```markdown
 # MOEVE Preboarding Web
 
 Aplicación Angular para la experiencia digital de **Pre-Onboarding de Moeve**.
