@@ -9,7 +9,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "moeve-web": {
+    "moeve-preboarding": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/moeve-web",
+            "outputPath": "dist/moeve-preboarding",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "moeve-web:build:production"
+              "buildTarget": "moeve-preboarding:build:production"
             },
             "development": {
-              "buildTarget": "moeve-web:build:development"
+              "buildTarget": "moeve-preboarding:build:development"
             }
           },
           "defaultConfiguration": "development"
