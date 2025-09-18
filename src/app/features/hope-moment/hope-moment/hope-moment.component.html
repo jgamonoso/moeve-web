@@ -1,4 +1,20 @@
-<section style="display:grid;place-content:center;height:100dvh">
-  <h1>✨ ---Página Hope-Moment!--- ✨</h1>
-  <p>(aquí el vídeo/animación con scroll)</p>
+<section class="hope" #section>
+  <!-- Opcional: overlay de texto/logo -->
+  <div class="overlay">
+    <!-- Aquí podrías poner un logo o CTA -->
+  </div>
+
+  <!-- El vídeo que scrubearemos con el scroll -->
+  <video
+    #video
+    class="hope__video"
+    src="assets/videos/hope-moment.mp4"
+    muted
+    playsinline
+    preload="auto"
+    poster=""
+  ></video>
+
+  <!-- Botón de “saltar” -->
+  <button class="skip" type="button" (click)="skip()">Saltar</button>
 </section>
