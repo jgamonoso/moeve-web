@@ -14,77 +14,129 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrls: ['./hope-moment.component.scss'],
 })
 export class HopeMomentComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('video',   { static: true }) videoRef!: ElementRef<HTMLVideoElement>;
-  @ViewChild('section', { static: true }) sectionRef!: ElementRef<HTMLElement>;
+  @ViewChild('videoIntro',   { static: true }) videoIntroRef!: ElementRef<HTMLVideoElement>;
+  @ViewChild('introSection', { static: true }) introSectionRef!: ElementRef<HTMLElement>;
 
+  @ViewChild('videoScrub',   { static: true }) videoScrubRef!: ElementRef<HTMLVideoElement>;
+  @ViewChild('scrubSection', { static: true }) scrubSectionRef!: ElementRef<HTMLElement>;
+
+  scrubReady = false;
   private st?: ScrollTrigger;
+  private cleanupFns: Array<() => void> = [];
   private router = inject(Router);
   private zone = inject(NgZone);
 
   ngAfterViewInit(): void {
-    // Todo GSAP fuera de Angular para no disparar change detection
+    const videoIntro = this.videoIntroRef.nativeElement;
+
+    // Intento 1: reproducir con audio (algunos navegadores lo permitirán)
+    videoIntro.muted = false;
+    videoIntro.currentTime = 0;
+    videoIntro.play().catch(() => {
+      // Si el navegador bloquea autoplay con audio, reproducimos muted (sin botón)
+      videoIntro.muted = true;
+      videoIntro.play().catch(() => {
+        // Último recurso: si esto fallara es que el navegador exige interacción
+        // pero normalmente autoplay muted funciona.
+      });
+    });
+
+    // Si el usuario interactúa (click/tecla/touch) mientras dura el vídeo 1,
+    // intentamos reactivar audio en caliente sin mostrar botones.
+    const tryEnableAudio = () => {
+      if (!videoIntro.ended) {
+        videoIntro.muted = false;
+        videoIntro.volume = 1;
+        videoIntro.play().catch(() => {
+          // Si aún no deja, lo dejamos muted; no molestamos más.
+        });
+      }
+    };
+    const events = ['pointerdown', 'keydown', 'touchstart'];
+    events.forEach(ev => window.addEventListener(ev, tryEnableAudio, { passive: true }));
+    this.cleanupFns.push(() => events.forEach(ev => window.removeEventListener(ev, tryEnableAudio)));
+
+    // Al terminar el vídeo 1 -> pasamos al scrub
+    const onEnded = () => {
+      this.enableScrubSection();
+      this.scrubSectionRef.nativeElement.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+    };
+    videoIntro.addEventListener('ended', onEnded);
+    this.cleanupFns.push(() => videoIntro.removeEventListener('ended', onEnded));
+  }
+
+  private enableScrubSection() {
+    this.scrubReady = true;
+
     this.zone.runOutsideAngular(() => {
-      const video = this.videoRef.nativeElement;
-      const section = this.sectionRef.nativeElement;
+      const video = this.videoScrubRef.nativeElement;
+      const section = this.scrubSectionRef.nativeElement;
 
       const setup = () => {
-        const duration = Math.max(0.1, video.duration || 0.1);
-
-        // Asegúrate de que el vídeo está pausado (no queremos reproducción automática)
         try { video.pause(); } catch {}
+        video.muted = true;
 
-        // Distancia de scroll que “recorrerá” el vídeo (ajusta a tu gusto)
-        const scrollDistance = 3000;
+        const duration = Math.max(0.1, video.duration || 0.1);
+        const fps = 30; // tras tu re-encode
+        const eps = 1 / fps; // ~un frame a 30 fps
+        const totalFrames = Math.round(duration * fps);
+        // “16 px por frame” suele dar scroll largo y suave; ajusta entre 12–20 según sensaciones:
+        const scrollDistance = totalFrames * 12;
+        console.log('scrollDistance:', scrollDistance)
 
-        const tween = gsap.fromTo(
-          video,
-          { currentTime: 0 },
-          {
-            currentTime: duration - 0.05, // evita clavar justo al final
-            ease: 'none',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top top',
-              end: `+=${scrollDistance}`,
-              scrub: true,   // el tiempo del vídeo sigue el scroll
-              pin: true,     // mantiene la sección fija mientras hacemos scroll
-              anticipatePin: 1,
-              onLeave: () => {
-                // Al terminar el scrub, navega al siguiente paso
-                this.zone.run(() => this.router.navigateByUrl('/landscape'));
-              },
-            }
+        // Primado para Safari/iOS (mejora seeks)
+        const prime = () =>
+          video.play().then(() => video.pause()).catch(() => { /* ignore */ });
+
+        // Función de sync con fastSeek si existe
+        const setTime = (t: number) => {
+          // Clamp por seguridad
+          const target = Math.max(0, Math.min(duration - eps, t));
+          if (typeof (video as any).fastSeek === 'function') {
+            (video as any).fastSeek(target);
+          } else {
+            video.currentTime = target;
           }
-        );
+        };
 
-        this.st = tween.scrollTrigger!;
+        // Creamos el ScrollTrigger controlado
+        const st = ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: `+=${scrollDistance}`,
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          onUpdate: (self) => {
+            const t = self.progress * (duration - eps);
+            setTime(t);
+          },
+          onLeave: () => {
+            this.zone.run(() => this.router.navigateByUrl('/landscape'));
+          }
+        });
+
+        this.st = st;
+
+        // Prime después de tener metadata
+        prime();
       };
 
-      // Si ya hay metadatos, montamos ya; si no, esperamos
       if (video.readyState >= 1) setup();
       else video.addEventListener('loadedmetadata', setup, { once: true });
 
-      // Si se redimensiona la ventana, refrescamos ScrollTrigger
       const onResize = () => ScrollTrigger.refresh();
       window.addEventListener('resize', onResize);
-
-      // Limpieza al destruir
-      this.cleanup = () => {
-        window.removeEventListener('resize', onResize);
-        this.st?.kill();
-      };
+      this.cleanupFns.push(() => window.removeEventListener('resize', onResize));
+      this.cleanupFns.push(() => this.st?.kill());
     });
   }
 
-  private cleanup?: () => void;
-
-  ngOnDestroy(): void {
-    this.cleanup?.();
+  skip() {
+    this.router.navigateByUrl('/landscape');
   }
 
-  // Botón “Saltar”
-  skip() {
-    // Opcional: podrías marcar un flag de “hope visto” en localStorage
-    this.router.navigateByUrl('/landscape');
+  ngOnDestroy(): void {
+    this.cleanupFns.forEach(fn => fn());
   }
 }

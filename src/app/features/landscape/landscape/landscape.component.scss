@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  /* Si quieres que el mapa ocupe todo */
+}
+
+.landscape {
+  min-height: 100vh;
+  background: url("/assets/images/landscape.png") center / cover no-repeat fixed;
+  /* Si no quieres fixed (parallax), quita 'fixed' */
+}
+
+/* Ejemplo de wrapper de contenido encima */
+.landscape__content {
+  backdrop-filter: blur(2px);
+  padding: 2rem;
+}
