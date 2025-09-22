@@ -1,6 +1,110 @@
-<div class="landscape">
-  <div class="landscape__content">
-    <!-- Aquí irán HUD, moléculas, menú lateral, etc. -->
-    <h2>Landscape</h2>
+<section class="landscape">
+  <!-- Fondo -->
+  <div class="landscape__bg" aria-hidden="true"></div>
+
+  <!-- HUD superior -->
+  <header class="hud">
+    <!-- Moléculas (arriba centrado) -->
+    <div
+      class="hud__molecules glass"
+      #badgeBar
+      aria-live="polite"
+      aria-label="Moléculas conseguidas"
+    >
+      <span class="hud__molecules-icon">⟡</span>
+      <span class="hud__molecules-label">Moléculas</span>
+      <span class="hud__molecules-value"
+        >{{ progress.molecules.value }} / {{ progress.molecules.total }}</span
+      >
+    </div>
+
+    <!-- Estado (arriba derecha) -->
+    <div class="hud__status glass" #statusBar>
+      <div class="hud__status-row">
+        <strong class="hud__percent">{{ progress.percent }}%</strong>
+        <span class="hud__label">completado</span>
+      </div>
+      <div class="hud__status-row">
+        <span class="hud__time"
+          >~ {{ formatMinutes(progress.remainingMinutes) }}</span
+        >
+        <span class="hud__label">restante</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menú lateral (izquierda) -->
+  <aside class="sidebar glass" #sidebar aria-label="Menú principal">
+    <div class="sidebar__header">
+      <button
+        class="sidebar__brand"
+        type="button"
+        aria-label="Inicio"
+        (click)="goHome()"
+      >
+        MOEVE
+      </button>
+    </div>
+
+    <nav class="nav" aria-label="Estaciones">
+      <button
+        *ngFor="let s of stations"
+        type="button"
+        class="nav__item"
+        (click)="openStation(s.id)"
+        [attr.aria-label]="'Abrir estación ' + s.title"
+      >
+        <span
+          class="nav__dot"
+          [class.nav__dot--done]="s.percent === 100"
+        ></span>
+        <span class="nav__title">{{ s.title }}</span>
+        <span class="nav__percent">{{ s.percent }}%</span>
+      </button>
+    </nav>
+
+    <div class="sidebar__spacer"></div>
+
+    <div class="sidebar__footer">
+      <button
+        type="button"
+        class="sidebar__btn"
+        (click)="cycleLang()"
+        aria-label="Cambiar idioma"
+      >
+        🌐 {{ lang.toUpperCase() }}
+      </button>
+      <button
+        type="button"
+        class="sidebar__btn"
+        (click)="logout()"
+        aria-label="Cerrar sesión"
+      >
+        ⎋ Salir
+      </button>
+    </div>
+  </aside>
+
+  <!-- Accesos rápidos (derecha) -->
+  <div class="quick" #quick aria-label="Accesos rápidos">
+    <button
+      type="button"
+      class="quick__btn"
+      (click)="openChecklist()"
+      aria-label="Checklist primer día y semana"
+    >
+      <span class="quick__icon">✓</span>
+      <span class="quick__label">Checklist</span>
+    </button>
+
+    <button
+      type="button"
+      class="quick__btn"
+      (click)="openSupport()"
+      aria-label="FAQ y persona de contacto"
+    >
+      <span class="quick__icon">?</span>
+      <span class="quick__label">FAQ</span>
+    </button>
   </div>
-</div>
+</section>
