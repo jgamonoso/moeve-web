@@ -1,14 +1,13 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { LocalFlagsService } from '../services/flags/local-flags.service';
+import { AuthService } from '../services/auth.service';
 
 export const firstAccessGuard: CanActivateFn = () => {
   const router = inject(Router);
-  const flags = inject(LocalFlagsService);
+  const auth = inject(AuthService);
 
-  // Si no hay userId, manda a login
-  if (!flags.userId) {
-    return router.createUrlTree(['/login']);
-  }
-  return true;
+  const user = auth.getCurrentUser();
+  if (user) return true;
+  router.navigateByUrl('/login');
+  return false;
 };
