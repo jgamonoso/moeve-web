@@ -12,8 +12,9 @@ El objetivo es guiar a los nuevos empleados a través de un recorrido gamificado
 - **RxJS 7**
 - **Angular Router** para la navegación
 - **HttpClient** (con `proxy.conf.json` para desarrollo local)
+- **Angular Material** Material Dialog para modales (idioma + onboarding)
 - **ESLint + Prettier** con hooks de Husky
-- **i18n propio** (servicio de flags + futuro soporte de internacionalización)
+- **ngx-translate v17** (i18n runtime, archivos JSON)
 - Animaciones planificadas con **CSS3 / Angular Animations**
 - Posible integración futura con **Lottie** para animaciones JSON
 
@@ -24,13 +25,17 @@ El objetivo es guiar a los nuevos empleados a través de un recorrido gamificado
 src/app
 ├─ app.routes.ts                # Definición de rutas principales
 ├─ app.config.ts                # Configuración global: router, http, NgRx store
-├─ app.component.\*              # Shell con <router-outlet>
+├─ app.component.\*             # Shell con <router-outlet>
 │
 ├─ core/                        # Servicios y guardas base
 │   ├─ services/
-│   │   ├─ api/                 # ApiService y endpoints BTP simulados
-│   │   ├─ flags/               # LocalFlagsService (idioma, onboarding, userId)
-│   │   └─ lottie/              # Servicio para animaciones Lottie (stub)
+│   │   ├─ auth.service.ts             # Fuente de verdad de sesión (authUser en localStorage)
+│   │   ├─ prefs.service.ts            # Preferencias (lang, onboardingDone)
+│   │   ├─ mock-data.service.ts        # Lee assets/mocks/context-progress.userX.json
+│   │   ├─ api/                        # ApiService y endpoints BTP simulados
+│   │   ├─ flags/                      # LocalFlagsService (idioma, onboarding, userId)
+│   │   │   └─ local-flags.service.ts
+│   │   └─ lottie/                     # Servicio para animaciones Lottie (stub)
 │   └─ guards/first-access.guard.ts
 │
 ├─ state/                       # Store NgRx (reducers, actions, selectors)
@@ -38,11 +43,13 @@ src/app
 │   └─ (future effects/)        # Efectos para llamadas a API
 │
 ├─ features/
+│   ├─ auth/login/              # Login demo (elige Empleado 1/2)
+│   ├─ loading/                 # Splash corto y redirección
 │   ├─ hope-moment/             # Pantalla inicial “Hope Moment”
-│   ├─ landscape/               # Pantalla principal con mapa 2.5D
-│   └─ (future: auth, loading)  # Login simulado y Splash screen
+│   └─ landscape/               # Pantalla principal con mapa 2.5D + HUD + menú lateral
 │
 └─ shared/                      # (por crear) componentes reutilizables
+    └─ ui/modal/                # ModalComponent (language | onboarding) con Angular Material
 ```
 
 ---
@@ -84,25 +91,28 @@ Si se quisiera saltar el hook porque se va con prisas:
 
 ## 🌐 Flujo funcional actual
 
-1. **Login simulado (pendiente de implementar)**
+1. **Login demo (innecesario en la solución final)** (`/login`)
 
-   * El usuario introduce un identificador
-   * Se guarda en `localStorage.uid`
+   * Elige Empleado 1/2. Se escribe authUser y (opcionalmente) onboardingDone = false.
 
-2. **Pantalla de Loading (pendiente)**
+2. **Pantalla de Loading** (`/loading`)
 
    * Animación de 3 segundos con spinner
    * Transición automática a HopeMoment
 
 3. **HopeMoment** (`/hope`)
 
-   * Primera pantalla tras el loading
-   * Lugar donde se mostrarán animaciones y selección inicial de idioma/onboarding
+   * Lugar inicial de bienvenida  (video con scroll)
 
 4. **Landscape** (`/landscape`)
 
-   * Mapa 2.5D con estaciones (aún en desarrollo)
-   * Cada estación tendrá módulos de tipo: scroll, tap2reveal, quiz, true/false
+   * Carga progreso desde assets/mocks/context-progress.userX.json.
+   * HUD con moléculas, % completado y tiempo restante.
+   * Menú lateral con estaciones.
+   * Modales:
+      * Si no hay idioma en PrefsService.lang, abre selección de idioma (Material).
+      * Si PrefsService.onboardingDone === false, abre onboarding (Material).
+   * El botón del menú lateral abre de nuevo el modal de idioma.
 
 ---
 
@@ -131,3 +141,9 @@ Si se quisiera saltar el hook porque se va con prisas:
 
 * **Arquitectura de componentes**: ver `Arquitectura_de_Componentes_para_Pre-Onboarding_Front_End 2.pptx`
 * **Flujos de usuario y pantallas Hi-Fi**: ver `Hi-Fi- Preboarding 2.0.pdf`
+
+
+## 📚 Probar rápido desde GitHub Codespaces
+   * Para desplegar en GitHub Codespaces:
+      * Botón Code → Create codespace.
+      * npm ci && npm run start -- --host 0.0.0.0 --port 4200
