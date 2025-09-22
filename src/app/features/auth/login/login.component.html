@@ -9,17 +9,18 @@
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <!-- Selector de usuario de demo -->
       <label>
         <span>Usuario</span>
-        <input
-          type="text"
-          autocomplete="username"
-          formControlName="username"
-          [class.invalid]="f.username.invalid && (f.username.touched || f.username.dirty)"
-          placeholder="p.ej. javier.sanchez@moeve.com"
-        />
-        <small *ngIf="f.username.invalid && (f.username.touched || f.username.dirty)">
-          Introduce tu usuario
+        <select
+          formControlName="userId"
+          [class.invalid]="f.userId.invalid && (f.userId.touched || f.userId.dirty)"
+        >
+          <option value="" disabled selected>Elige un usuario de prueba…</option>
+          <option *ngFor="let u of users" [value]="u.id">{{ u.label }}</option>
+        </select>
+        <small *ngIf="f.userId.invalid && (f.userId.touched || f.userId.dirty)">
+          Selecciona un usuario
         </small>
       </label>
 
@@ -33,7 +34,7 @@
           placeholder=""
         />
         <small *ngIf="f.password.invalid && (f.password.touched || f.password.dirty)">
-          Introduce tu contraseña
+          Introduce tu contraseña (cualquiera vale en la demo)
         </small>
       </label>
 
@@ -43,7 +44,7 @@
       </button>
 
       <p class="hint">
-        (En esta demo, cualquier credencial te deja pasar)
+        (En esta demo, elige un usuario y escribe cualquier contraseña)
       </p>
     </form>
   </div>

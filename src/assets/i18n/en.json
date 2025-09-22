@@ -1,0 +1,25 @@
+{
+  "langModal": {
+    "title": "Choose your language",
+    "subtitle": "You can change it later",
+    "es": "Spanish",
+    "en": "English",
+    "continue": "Continue"
+  },
+  "onboarding": {
+    "step1": { "title": "Welcome!", "body": "This is your MOEVE experience…" },
+    "step2": { "title": "How it works", "body": "Complete stations and modules…" },
+    "step3": { "title": "Ready to go", "body": "Collect your molecules…" },
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "Start!"
+  },
+  "landscape": {
+    "molecules": "Molecules",
+    "molecules_aria": "Molecules earned",
+    "completed": "completed",
+    "remaining": "remaining",
+    "exit": "Sign out",
+    "change_lang": "Change language"
+  }
+}

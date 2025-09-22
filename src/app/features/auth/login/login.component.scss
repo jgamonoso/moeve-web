@@ -48,7 +48,7 @@ form {
     display: grid; gap: 8px;
     span { font-size: 12px; color: var(--moeve-muted); }
 
-    input {
+    input, select {
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;

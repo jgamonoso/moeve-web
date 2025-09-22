@@ -1,4 +1,4 @@
-export type UserProfile = 'newHire' | 'internalMobility';
+export type UserProfile = 'empleado1' | 'empleado2Mobility';
 
 export interface Recommendation {
   nextStationId?: string;         // para el pointer

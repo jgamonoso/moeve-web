@@ -1,0 +1,12 @@
+{
+  "molecules": { "value": 1, "total": 5 },
+  "percent": 18,
+  "remainingMinutes": 140,
+  "stations": [
+    { "id": "welcome",  "title": "Welcome",  "percent": 100, "completedModules": 4, "totalModules": 4, "durationMins": 20, "suggestedOrder": 1 },
+    { "id": "culture",  "title": "Culture",  "percent": 25,  "completedModules": 1, "totalModules": 4, "durationMins": 25, "suggestedOrder": 2 },
+    { "id": "it-setup", "title": "IT setup", "percent": 0,   "completedModules": 0, "totalModules": 4, "durationMins": 30, "suggestedOrder": 3 },
+    { "id": "benefits", "title": "Benefits", "percent": 0,   "completedModules": 0, "totalModules": 3, "durationMins": 15, "suggestedOrder": 4 },
+    { "id": "policies", "title": "Policies", "percent": 0,   "completedModules": 0, "totalModules": 5, "durationMins": 40, "suggestedOrder": 5 }
+  ]
+}

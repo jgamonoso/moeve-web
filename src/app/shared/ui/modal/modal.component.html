@@ -1,1 +1,39 @@
-<p>modal works!</p>
+<!-- Estilos Material: título, contenido y acciones -->
+<ng-container [ngSwitch]="data.type">
+  <!-- ================== LANGUAGE ================== -->
+  <ng-container *ngSwitchCase="'language'">
+    <h2 mat-dialog-title>{{ 'langModal.title' | translate }}</h2>
+    <mat-dialog-content class="content">
+      <p class="subtitle">{{ 'langModal.subtitle' | translate }}</p>
+
+      <mat-radio-group [value]="lang()" (change)="lang.set($event.value)">
+        <mat-radio-button class="radio" value="es">{{ 'langModal.es' | translate }}</mat-radio-button>
+        <mat-radio-button class="radio" value="en">{{ 'langModal.en' | translate }}</mat-radio-button>
+      </mat-radio-group>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button mat-flat-button color="primary" (click)="confirmLang()">
+        {{ 'langModal.continue' | translate }}
+      </button>
+    </mat-dialog-actions>
+  </ng-container>
+
+  <!-- ================== ONBOARDING ================== -->
+  <ng-container *ngSwitchCase="'onboarding'">
+    <h2 mat-dialog-title>{{ ('onboarding.step' + (step()+1) + '.title') | translate }}</h2>
+
+    <mat-dialog-content class="content">
+      <p class="subtitle">{{ ('onboarding.step' + (step()+1) + '.body') | translate }}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="start">
+      <button mat-button (click)="prev()" [disabled]="step()===0">Atrás</button>
+      <span class="spacer"></span>
+      <button mat-stroked-button (click)="skip()">Saltar</button>
+      <button mat-flat-button color="primary" *ngIf="step()<2" (click)="next()">Siguiente</button>
+      <button mat-flat-button color="primary" *ngIf="step()===2" (click)="finish()">¡Empezar!</button>
+    </mat-dialog-actions>
+  </ng-container>
+</ng-container>

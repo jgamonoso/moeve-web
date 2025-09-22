@@ -9,10 +9,10 @@
       class="hud__molecules glass"
       #badgeBar
       aria-live="polite"
-      aria-label="Moléculas conseguidas"
+      [attr.aria-label]="'landscape.molecules_aria' | translate"
     >
       <span class="hud__molecules-icon">⟡</span>
-      <span class="hud__molecules-label">Moléculas</span>
+      <span class="hud__molecules-label">{{ 'landscape.molecules' | translate }}</span>
       <span class="hud__molecules-value"
         >{{ progress.molecules.value }} / {{ progress.molecules.total }}</span
       >
@@ -22,13 +22,13 @@
     <div class="hud__status glass" #statusBar>
       <div class="hud__status-row">
         <strong class="hud__percent">{{ progress.percent }}%</strong>
-        <span class="hud__label">completado</span>
+        <span class="hud__label">{{ 'landscape.completed' | translate }}</span>
       </div>
       <div class="hud__status-row">
         <span class="hud__time"
           >~ {{ formatMinutes(progress.remainingMinutes) }}</span
         >
-        <span class="hud__label">restante</span>
+        <span class="hud__label">{{ 'landscape.remaining' | translate }}</span>
       </div>
     </div>
   </header>
@@ -51,7 +51,7 @@
         *ngFor="let s of stations"
         type="button"
         class="nav__item"
-        (click)="openStation(s.id)"
+        (click)="openStation(s)"
         [attr.aria-label]="'Abrir estación ' + s.title"
       >
         <span
@@ -59,7 +59,7 @@
           [class.nav__dot--done]="s.percent === 100"
         ></span>
         <span class="nav__title">{{ s.title }}</span>
-        <span class="nav__percent">{{ s.percent }}%</span>
+        <!-- <span class="nav__percent">{{ s.percent }}%</span> -->
       </button>
     </nav>
 
@@ -69,10 +69,10 @@
       <button
         type="button"
         class="sidebar__btn"
-        (click)="cycleLang()"
+        (click)="openLangModal()"
         aria-label="Cambiar idioma"
       >
-        🌐 {{ lang.toUpperCase() }}
+        {{ lang.toUpperCase() }}
       </button>
       <button
         type="button"
@@ -80,7 +80,7 @@
         (click)="logout()"
         aria-label="Cerrar sesión"
       >
-        ⎋ Salir
+        {{ 'landscape.exit' | translate }}
       </button>
     </div>
   </aside>

@@ -2,7 +2,7 @@
   "molecules": { "value": 2, "total": 5 },
   "percent": 46,
   "remainingMinutes": 75,
-  "profile": "newHire",
+  "profile": "empleado1",
   "recommendation": { "nextStationId": "culture", "reason": "Contenido prioritario para nuevas incorporaciones" },
   "stations": [
     { "id":"welcome","title":"Bienvenida","percent":100,"completedModules":4,"totalModules":4,"durationMins":8,"suggestedOrder":1,"badges":[{"type":"priority","label":"Prioritario"}] },

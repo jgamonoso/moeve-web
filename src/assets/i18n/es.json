@@ -1,0 +1,25 @@
+{
+  "langModal": {
+    "title": "Elige tu idioma",
+    "subtitle": "Podrás cambiarlo más tarde",
+    "es": "Español",
+    "en": "Inglés",
+    "continue": "Continuar"
+  },
+  "onboarding": {
+    "step1": { "title": "¡Bienvenido/a!", "body": "Esta es tu experiencia MOEVE…" },
+    "step2": { "title": "¿Cómo funciona?", "body": "Completa estaciones y módulos…" },
+    "step3": { "title": "Listo para empezar", "body": "Consigue tus moléculas…" },
+    "skip": "Saltar",
+    "next": "Siguiente",
+    "finish": "¡Empezar!"
+  },
+  "landscape": {
+    "molecules": "Moléculas",
+    "molecules_aria": "Moléculas conseguidas",
+    "completed": "completado",
+    "remaining": "restante",
+    "exit": "Salir",
+    "change_lang": "Cambiar idioma"
+  }
+}

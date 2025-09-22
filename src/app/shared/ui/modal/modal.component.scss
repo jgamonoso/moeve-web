@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.content {
+  min-width: 380px;
+  max-width: 520px;
+}
+
+.subtitle {
+  margin: 0 0 12px;
+  opacity: .8;
+}
+
+.radio { display: block; margin: 6px 0; }
+
+.spacer { flex: 1 1 auto; }
+
+/* Panel Material personalizado (úsa panelClass: 'moeve-dialog') */
+::ng-deep .moeve-dialog .mdc-dialog__surface {
+  border-radius: 16px;
+}
