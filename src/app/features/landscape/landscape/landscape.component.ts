@@ -10,19 +10,24 @@ import { MockDataService } from '../../../core/services/mock-data.service';
 import { ProgressContext, StationSummary } from '../../../core/models/progress.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { SidebarMenuComponent, SidebarItem } from '../../../shared/ui/sidebar-menu/sidebar-menu.component';
 
 @Component({
   selector: 'app-landscape',
   standalone: true,
   templateUrl: './landscape.component.html',
   styleUrls: ['./landscape.component.scss'],
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, SidebarMenuComponent],
 })
 export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('sidebar', { static: true }) sidebarRef!: ElementRef<HTMLElement>;
-  @ViewChild('badgeBar', { static: true }) badgeBarRef!: ElementRef<HTMLElement>;
+  // ⬇️ Eliminamos la ref antigua #sidebar que ya no existe
+  // @ViewChild('sidebar', { static: true }) sidebarRef!: ElementRef<HTMLElement>;
+
+  // ✅ Refs reales para animaciones
+  @ViewChild('sideMenu',  { static: true, read: ElementRef }) sideMenuRef!: ElementRef<HTMLElement>;
+  @ViewChild('badgeBar',  { static: true }) badgeBarRef!: ElementRef<HTMLElement>;
   @ViewChild('statusBar', { static: true }) statusBarRef!: ElementRef<HTMLElement>;
-  @ViewChild('quick', { static: true }) quickRef!: ElementRef<HTMLElement>;
+  @ViewChild('quick',     { static: true }) quickRef!: ElementRef<HTMLElement>;
 
   private router = inject(Router);
   private zone = inject(NgZone);
@@ -40,9 +45,11 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
     stations: []
   };
   stations: StationSummary[] = [];
-  lang = this.prefs.lang; // 'es' por defecto si no hay nada
+  lang: string = this.prefs.lang || 'es';
 
   private i18n = inject(TranslateService); // 👈 inyecta el servicio
+
+  menuCollapsed = false;
 
   constructor() {
     // Aplica el idioma almacenado (si existe) al cargar el componente
@@ -69,24 +76,47 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    // ✅ Animación de entrada (de vuelta) usando los elementos reales
     this.zone.runOutsideAngular(() => {
       this.gsapCtx = gsap.context(() => {
-        const sidebar = this.sidebarRef.nativeElement;
-        const badge   = this.badgeBarRef.nativeElement;
-        const status  = this.statusBarRef.nativeElement;
-        const quick   = this.quickRef.nativeElement;
+        // Preferimos animar el panel real .sidemenu (fixed)
+        const sideMenuHost = this.sideMenuRef?.nativeElement;
+        const sideMenuPanel = sideMenuHost?.querySelector?.('.sidemenu') as HTMLElement | null;
 
-        const tl = gsap.timeline({ defaults: { duration: 0.8, ease: 'power3.out' }});
-        tl.from(sidebar, { x: -40, autoAlpha: 0 }, 0.0);
-        tl.from(badge,   { y: -40, autoAlpha: 0 }, 0.1);
-        tl.from(status,  { y: -40, autoAlpha: 0 }, 0.18);
-        tl.from(quick,   { x:  40, autoAlpha: 0 }, 0.18);
+        const badge  = this.badgeBarRef?.nativeElement;
+        const status = this.statusBarRef?.nativeElement;
+        const quick  = this.quickRef?.nativeElement;
+
+        const tl = gsap.timeline({ defaults: { duration: 5, ease: 'power3.out' }});
+
+        if (sideMenuPanel) tl.from(sideMenuPanel, { x: -40, autoAlpha: 0 }, 0.0);
+        else if (sideMenuHost) tl.from(sideMenuHost, { x: -40, autoAlpha: 0 }, 0.0);
+
+        if (badge)  tl.from(badge,  { y: -40, autoAlpha: 0 }, 0.10);
+        if (status) tl.from(status, { y: -40, autoAlpha: 0 }, 0.18);
+        if (quick)  tl.from(quick,  { x:  40, autoAlpha: 0 }, 0.18);
 
         tl.add(() => {
           this.zone.run(() => this.maybeOpenModals());
         });
       });
     });
+  }
+
+  get menuItems(): SidebarItem[] {
+    // Puedes mapear según tus estaciones reales
+    return (this.stations || []).map(s => ({
+      id: s.id,
+      title: s.title,
+      icon: '∙',            // aquí luego podéis meter icono real por categoría
+      done: s.percent === 100,
+      disabled: false,
+    }));
+  }
+
+  onMenuItemClick(it: SidebarItem) {
+    const s = this.stations.find(x => x.id === it.id);
+    if (s) this.openStation(s);
   }
 
   private async maybeOpenModals() {

@@ -1,0 +1,54 @@
+<aside class="sidemenu" [class.sidemenu--collapsed]="collapsed" aria-label="Main menu">
+  <!-- Cabecera con logo y botón colapsar -->
+  <div class="sidemenu__header">
+    <button class="brand" type="button" (click)="brandClick.emit()" aria-label="Inicio">
+      <span class="brand__logo" [class.hide-when-collapsed]="collapsed">moeve</span>
+      <span class="brand__dot" *ngIf="collapsed">m</span>
+    </button>
+
+    <!-- ⚠️ Renombrado para no chocar con Tailwind .collapse -->
+    <button class="sidemenu__toggle" type="button" aria-label="Cerrar/abrir menú" (click)="toggleCollapse()">
+      <span class="sidemenu__toggle-icon">{{ collapsed ? '›' : '‹' }}</span>
+    </button>
+  </div>
+
+  <!-- Cuerpo centrado verticalmente -->
+  <div class="sidemenu__middle">
+    <!-- Lista -->
+    <nav class="sidemenu__nav" aria-label="Secciones">
+      <button
+        type="button"
+        class="navitem"
+        *ngFor="let it of items"
+        [class.navitem--disabled]="it.disabled"
+        (click)="onItemClick(it)"
+        [attr.aria-label]="it.title"
+      >
+        <span class="navitem__icon">{{ it.icon || '•' }}</span>
+        <span class="navitem__title" [class.hide-when-collapsed]="collapsed">{{ it.title }}</span>
+        <span class="navitem__dot" [class.navitem__dot--done]="it.done"></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Idioma -->
+  <div class="sidemenu__lang">
+    <button type="button" class="langbtn" (click)="langClick.emit()"
+            [attr.aria-label]="'landscape.change_lang' | translate">
+      <span class="langbtn__icon" *ngIf="collapsed">🌐</span>
+      <span class="langbtn__label" [class.hide-when-collapsed]="collapsed">{{ lang }}</span>
+      <span class="langbtn__chev"  [class.hide-when-collapsed]="collapsed">▾</span>
+    </button>
+  </div>
+
+  <!-- Cerrar sesión -->
+  <div class="sidemenu__footer">
+    <button type="button" class="logout" (click)="logoutClick.emit()"
+            [attr.aria-label]="'landscape.exit' | translate">
+      <span class="logout__icon"  *ngIf="collapsed">⎋</span>
+      <span class="logout__label" [class.hide-when-collapsed]="collapsed">
+        {{ 'landscape.exit' | translate }}
+      </span>
+    </button>
+  </div>
+</aside>

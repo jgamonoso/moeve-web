@@ -26,7 +26,7 @@
       </div>
       <div class="hud__status-row">
         <span class="hud__time"
-          >~ {{ formatMinutes(progress.remainingMinutes) }}</span
+          >{{ formatMinutes(progress.remainingMinutes) }}</span
         >
         <span class="hud__label">{{ 'landscape.remaining' | translate }}</span>
       </div>
@@ -34,56 +34,18 @@
   </header>
 
   <!-- Menú lateral (izquierda) -->
-  <aside class="sidebar glass" #sidebar aria-label="Menú principal">
-    <div class="sidebar__header">
-      <button
-        class="sidebar__brand"
-        type="button"
-        aria-label="Inicio"
-        (click)="goHome()"
-      >
-        MOEVE
-      </button>
-    </div>
-
-    <nav class="nav" aria-label="Estaciones">
-      <button
-        *ngFor="let s of stations"
-        type="button"
-        class="nav__item"
-        (click)="openStation(s)"
-        [attr.aria-label]="'Abrir estación ' + s.title"
-      >
-        <span
-          class="nav__dot"
-          [class.nav__dot--done]="s.percent === 100"
-        ></span>
-        <span class="nav__title">{{ s.title }}</span>
-        <!-- <span class="nav__percent">{{ s.percent }}%</span> -->
-      </button>
-    </nav>
-
-    <div class="sidebar__spacer"></div>
-
-    <div class="sidebar__footer">
-      <button
-        type="button"
-        class="sidebar__btn"
-        (click)="openLangModal()"
-        aria-label="Cambiar idioma"
-      >
-        {{ lang.toUpperCase() }}
-      </button>
-      <button
-        type="button"
-        class="sidebar__btn"
-        (click)="logout()"
-        aria-label="Cerrar sesión"
-      >
-        {{ 'landscape.exit' | translate }}
-      </button>
-    </div>
-  </aside>
+  <!-- 👇 le ponemos una ref para la animación de entrada -->
+  <app-sidebar-menu
+    #sideMenu
+    [collapsed]="menuCollapsed"
+    (collapsedChange)="menuCollapsed = $event"
+    [items]="menuItems"
+    [lang]="lang.toUpperCase()"
+    (itemClick)="onMenuItemClick($event)"
+    (langClick)="openLangModal()"
+    (logoutClick)="logout()"
+    (brandClick)="goHome()"
+  />
 
   <!-- Accesos rápidos (derecha) -->
   <div class="quick" #quick aria-label="Accesos rápidos">
