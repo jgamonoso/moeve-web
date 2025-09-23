@@ -127,13 +127,9 @@ Si se quisiera saltar el hook porque se va con prisas:
 
 ## 🔮 Próximos pasos sugeridos
 
-1. Crear **LoginComponent** (`/login`) que guarde `uid` en `LocalFlagsService`.
-2. Crear **SplashComponent** (`/loading`) con animación de 3 segundos antes de Hope.
-3. Integrar **guard** `first-access.guard` para bloquear acceso sin `uid`.
-4. Añadir modal de **selección de idioma** y **onboarding** tras Hope si los flags no existen.
-5. Implementar API simulada (`ApiService`) con mocks de `GET /context/progress` y `GET /stations/:id`.
-6. Construir la pantalla **Landscape** con SVG + CSS3, siguiendo la arquitectura de componentes.
-7. Añadir módulos de contenido (scroll, reveal, quiz, tf) tal como aparece en el flujo de Figma.
+1. Implementar API simulada (`ApiService`) con mocks de `GET /context/progress` y `GET /stations/:id`.
+2. Construir la pantalla **Landscape** con SVG + CSS3, siguiendo la arquitectura de componentes.
+3. Añadir módulos de contenido (scroll, reveal, quiz, tf) tal como aparece en el flujo de Figma.
 
 ---
 

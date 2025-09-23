@@ -17,11 +17,20 @@
   &__bg {
     position: fixed;
     inset: 0;
-    background: url("/assets/images/landscape.png") center/cover no-repeat;
+    /* por defecto: versión grande */
+    background: url("/assets/images/landscape1920-1080.png") center/cover no-repeat;
     filter: saturate(1.02);
     z-index: 0;
   }
 }
+
+/* si el viewport es más estrecho que 1518px, usamos la imagen 1518x1080 */
+@media (max-width: 1518px) {
+  .landscape__bg {
+    background-image: url("/assets/images/landscape1518-1080.png");
+  }
+}
+
 
 /* Glass cards */
 .glass {
@@ -218,6 +227,7 @@
     left: -8px;
     transform: translateX(-100%);
     opacity: 0.85;
+    color:#2b5bd6;
   }
 }
 

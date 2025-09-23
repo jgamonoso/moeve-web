@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, Component, ElementRef, NgZone, OnDestroy, ViewChild, inject,
+  AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
   templateUrl: './hope-moment.component.html',
   styleUrls: ['./hope-moment.component.scss'],
 })
-export class HopeMomentComponent implements AfterViewInit, OnDestroy {
+export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('videoIntro',   { static: true }) videoIntroRef!: ElementRef<HTMLVideoElement>;
   @ViewChild('introSection', { static: true }) introSectionRef!: ElementRef<HTMLElement>;
 
@@ -21,10 +21,17 @@ export class HopeMomentComponent implements AfterViewInit, OnDestroy {
   @ViewChild('scrubSection', { static: true }) scrubSectionRef!: ElementRef<HTMLElement>;
 
   scrubReady = false;
+  scrubSrc = 'assets/videos/hope-moment2-1280-910.mp4'; // valor por defecto
   private st?: ScrollTrigger;
   private cleanupFns: Array<() => void> = [];
   private router = inject(Router);
   private zone = inject(NgZone);
+
+
+  ngOnInit(): void {
+    // Elegimos vídeo en función del ancho de ventana
+    this.scrubSrc = this.pickScrubSrc();
+  }
 
   ngAfterViewInit(): void {
     const videoIntro = this.videoIntroRef.nativeElement;
@@ -65,6 +72,14 @@ export class HopeMomentComponent implements AfterViewInit, OnDestroy {
     this.cleanupFns.push(() => videoIntro.removeEventListener('ended', onEnded));
   }
 
+  private pickScrubSrc(): string {
+    const w = window.innerWidth;
+    // Si el ancho es igual o mayor que 1518, usamos el 1920x1080; si no, el 1280x910
+    return w >= 1518
+      ? 'assets/videos/hope-moment2-1920-1080.mp4'
+      : 'assets/videos/hope-moment2-1280-910.mp4';
+  }
+
   private enableScrubSection() {
     this.scrubReady = true;
 
@@ -85,8 +100,7 @@ export class HopeMomentComponent implements AfterViewInit, OnDestroy {
         console.log('scrollDistance:', scrollDistance)
 
         // Primado para Safari/iOS (mejora seeks)
-        const prime = () =>
-          video.play().then(() => video.pause()).catch(() => { /* ignore */ });
+        const prime = () => video.play().then(() => video.pause()).catch(() => { /* ignore */ });
 
         // Función de sync con fastSeek si existe
         const setTime = (t: number) => {

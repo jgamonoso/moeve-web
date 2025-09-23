@@ -22,7 +22,7 @@
     preload="auto"
     poster=""
   >
-    <source src="assets/videos/hope-moment2-scrub.mp4"  type="video/mp4" />
+    <source [attr.src]="scrubSrc" type="video/mp4" />
   </video>
 
   <button class="skip" type="button" (click)="skip()">Saltar</button>
