@@ -55,9 +55,16 @@
     <button type="button" class="logout" (click)="logoutClick.emit()"
             [attr.aria-label]="'landscape.exit' | translate"
             [attr.title]="collapsed ? ('landscape.exit' | translate) : null">
-      <span class="logout__icon"  *ngIf="collapsed">⎋</span>
+      <!-- Icono Material solo en colapsado -->
+      <span *ngIf="collapsed"
+            class="material-symbols-outlined logout__icon"
+            aria-hidden="true">
+        logout
+      </span>
+
+      <!-- Texto (con tooltip auto cuando no está colapsado) -->
       <span class="logout__label" [class.hide-when-collapsed]="collapsed"
-            [appAutoTooltip]="!collapsed ? ('landscape.exit' | translate) : null">
+        [appAutoTooltip]="!collapsed ? ('landscape.exit' | translate) : null">
         {{ 'landscape.exit' | translate }}
       </span>
     </button>

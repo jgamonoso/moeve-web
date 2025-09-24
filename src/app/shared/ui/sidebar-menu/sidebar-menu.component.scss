@@ -220,7 +220,15 @@
   padding: 10px;
   max-width: 75%;
 }
-.logout__icon { font-size: 16px; }
+
+// .logout__icon { font-size: 16px; }
+/* Icono de logout en estado colapsado */
+.logout__icon {
+  font-size: 22px;     /* igual que .navitem__icon */
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+}
 
 /* Utilidad: ocultar texto manteniendo alturas */
 .hide-when-collapsed {
