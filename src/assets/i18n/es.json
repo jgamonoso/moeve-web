@@ -28,5 +28,10 @@
     "itSetup": "Tu rol y negocio",
     "benefits": "Tu área y equipo",
     "policies": "Tareas esenciales"
+  },
+  "hud": {
+    "molecules_reached": "Energía acumulada",
+    "remaining_time": "Tiempo restante",
+    "min": "min"
   }
 }

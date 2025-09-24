@@ -1,0 +1,25 @@
+<article class="hudcard hudcard--ring"
+         [attr.aria-label]="(titleKey | translate) + ': ' + percent + '%'">
+
+  <!-- SVG cuadrado, sin alto extra -->
+  <svg class="hudring" viewBox="0 0 60 60" width="84" height="84" role="img" aria-hidden="true">
+    <circle [attr.cx]="cx" [attr.cy]="cy" r="28" class="hudring__disc"/>
+    <circle [attr.cx]="cx" [attr.cy]="cy" [attr.r]="r" class="hudring__track" [attr.stroke-width]="strokeWidth"/>
+    <circle [attr.cx]="cx" [attr.cy]="cy" [attr.r]="r" class="hudring__bar"
+            [attr.stroke-width]="strokeWidth"
+            [attr.stroke-dasharray]="circumference()"
+            [attr.stroke-dashoffset]="dashOffset()"
+            transform="rotate(-90, 30, 30)"/>
+    <text x="30" y="30" text-anchor="middle" dominant-baseline="central" class="hudring__text">
+        {{ percent }}%
+    </text>
+    </svg>
+
+
+  <div class="info">
+    <div class="info__title">{{ 'hud.remaining_time' | translate }}</div>
+    <div class="info__time">
+      <strong>{{ timeStr() }}</strong>
+    </div>
+  </div>
+</article>

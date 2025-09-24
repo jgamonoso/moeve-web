@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  opacity: 0;
+  transform: translateY(-6px);
+  animation: hudIn .45s ease .04s forwards;
+}
+@keyframes hudIn { to { opacity: 1; transform: translateY(0); } }
+
+.hudcard {
+  --hud-bg: rgba(255,255,255,.92);
+  --hud-border: rgba(15,23,42,.08);
+  display: grid;
+  gap: 10px;                 /* un pelín más de aire entre título y barra */
+  padding: 10px 14px 14px;   /* menos alto arriba, más abajo para clavar el look */
+  background: var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 18px rgba(2,8,23,.08);
+  color: #0f172a;
+}
+.hudcard__head {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.hudcard__title { margin: 0; font: 600 14px/1.1 ui-sans-serif,system-ui; opacity: .85; }
+.hudcard__counter { font: 700 14px/1 ui-sans-serif,system-ui; }
+
+/* La barra ocupa más como en Figma; el alto lo dicta el viewBox */
+.bar {
+  width: 320px;          /* más ancha */
+  max-width: 52vw;
+  height: auto;
+  display: block;
+  margin-top: -62px;       /* acerca la barra al título */
+}

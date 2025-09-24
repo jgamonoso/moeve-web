@@ -1,0 +1,58 @@
+<article class="hudcard hudcard--bar" aria-live="polite"
+         [attr.aria-label]="(labelKey | translate)">
+  <header class="hudcard__head">
+    <h3 class="hudcard__title">{{ labelKey | translate }}</h3>
+    <div class="hudcard__counter">{{ value }} / {{ total }}</div>
+  </header>
+
+  <!-- El viewBox mantiene proporciones; el ancho real va por CSS -->
+  <svg class="bar" viewBox="0 0 392 120" role="img" aria-hidden="true">
+    <defs>
+      <!-- Máscara con la píldora exterior: nada se sale del rail -->
+      <mask id="railMask">
+        <!-- Fondo negro transparente -->
+        <rect x="0" y="0" width="392" height="120" fill="black" />
+        <!-- La píldora se pinta en blanco (área visible) -->
+        <path fill="white"
+          d="M36 100C36 91.6813 42.7436 84.9376 51.0623 84.9376H340.938C349.256 84.9376 356 91.6813 356 100C356 108.319 349.256 115.062 340.938 115.062H51.0624C42.7436 115.062 36 108.319 36 100Z"/>
+      </mask>
+
+      <!-- Gradiente de la banda -->
+      <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#90FFBB"/>
+        <stop offset="1" stop-color="#6AF18F"/>
+      </linearGradient>
+
+      <!-- Patrón moléculas (opcional) -->
+      <symbol id="mol" viewBox="0 0 18 8">
+        <circle cx="4"  cy="4"   r="2"   fill="#003846"/>
+        <circle cx="9"  cy="2"   r="1.4" fill="#003846"/>
+        <circle cx="13" cy="5.5" r="1.6" fill="#003846"/>
+        <path d="M5 4 L8 2 M10 2 L12 5.5" stroke="#003846" stroke-width="1" stroke-linecap="round"/>
+      </symbol>
+      <pattern id="molPattern" patternUnits="userSpaceOnUse" width="26" height="12">
+        <use href="#mol" x="0"  y="2"/>
+        <use href="#mol" x="13" y="0"/>
+      </pattern>
+    </defs>
+
+    <!-- Rail (pista) -->
+    <path
+      d="M36 100C36 91.6813 42.7436 84.9376 51.0623 84.9376H340.938C349.256 84.9376 356 91.6813 356 100C356 108.319 349.256 115.062 340.938 115.062H51.0624C42.7436 115.062 36 108.319 36 100Z"
+      fill="#004453" />
+
+    <!-- Relleno: redondeado + enmascarado por el rail -->
+    <g mask="url(#railMask)">
+      <!-- Capa verde lisa -->
+      <rect [attr.x]="barX" [attr.y]="barY"
+            [attr.width]="clipWidth" [attr.height]="barHeight"
+            [attr.rx]="barRx" [attr.ry]="barRy"
+            fill="url(#barGrad)"/>
+      <!-- Textura moléculas -->
+      <rect [attr.x]="barX" [attr.y]="barY"
+            [attr.width]="clipWidth" [attr.height]="barHeight"
+            [attr.rx]="barRx" [attr.ry]="barRy"
+            fill="url(#molPattern)" opacity=".9"/>
+    </g>
+  </svg>
+</article>

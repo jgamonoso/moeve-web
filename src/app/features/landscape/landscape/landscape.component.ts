@@ -11,6 +11,8 @@ import { ProgressContext, StationSummary } from '../../../core/models/progress.m
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SidebarMenuComponent, SidebarItem } from '../../../shared/ui/sidebar-menu/sidebar-menu.component';
+import { AchievementProgressComponent } from '../../../shared/ui/achievement-progress/achievement-progress.component';
+import { CountdownProgressComponent } from '../../../shared/ui/countdown-progress/countdown-progress.component';
 
 const SIDEBAR_COLLAPSE_KEY = 'sidebar.collapsed';
 
@@ -19,10 +21,10 @@ const SIDEBAR_COLLAPSE_KEY = 'sidebar.collapsed';
   standalone: true,
   templateUrl: './landscape.component.html',
   styleUrls: ['./landscape.component.scss'],
-  imports: [CommonModule, TranslateModule, SidebarMenuComponent],
+  imports: [CommonModule, TranslateModule, SidebarMenuComponent, AchievementProgressComponent, CountdownProgressComponent],
 })
 export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
-  // ✅ Refs reales para animaciones
+  // Refs reales para animaciones
   @ViewChild('sideMenu',  { static: true, read: ElementRef }) sideMenuRef!: ElementRef<HTMLElement>;
   @ViewChild('badgeBar',  { static: true }) badgeBarRef!: ElementRef<HTMLElement>;
   @ViewChild('statusBar', { static: true }) statusBarRef!: ElementRef<HTMLElement>;
@@ -48,7 +50,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private i18n = inject(TranslateService); // 👈 inyecta el servicio
 
-  // ✅ El padre es la fuente de la verdad; inicializamos desde localStorage
+  // El padre es la fuente de la verdad; inicializamos desde localStorage
   menuCollapsed = (localStorage.getItem(SIDEBAR_COLLAPSE_KEY) === '1');
 
   constructor() {
@@ -76,7 +78,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    // ✅ Animación de entrada (de vuelta) usando los elementos reales
+    // Animación de entrada (de vuelta) usando los elementos reales
     this.zone.runOutsideAngular(() => {
       this.gsapCtx = gsap.context(() => {
         const sideMenuHost = this.sideMenuRef?.nativeElement;
@@ -87,6 +89,8 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
         const quick  = this.quickRef?.nativeElement;
 
         const tl = gsap.timeline({ defaults: { duration: 5, ease: 'power3.out' }});
+        gsap.from('.hudcard', { y: -12, autoAlpha: 0, duration: 5, stagger: .08, ease: 'power3.out' });
+
 
         if (sideMenuPanel) tl.from(sideMenuPanel, { x: -40, autoAlpha: 0 }, 0.0);
         else if (sideMenuHost) tl.from(sideMenuHost, { x: -40, autoAlpha: 0 }, 0.0);
@@ -102,7 +106,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  // ✅ Persistimos cambios de colapsado y actualizamos el input
+  // Persistimos cambios de colapsado y actualizamos el input
   onCollapsedChange(v: boolean) {
     this.menuCollapsed = v;
     localStorage.setItem(SIDEBAR_COLLAPSE_KEY, v ? '1' : '0');

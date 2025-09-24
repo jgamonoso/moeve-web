@@ -46,6 +46,15 @@
   pointer-events: none; /* que no bloquee clicks sobre el mapa */
   z-index: 2;
 
+  .hud__center {
+    position: fixed; top: 16px; left: 75%; transform: translateX(-50%);
+    pointer-events: auto;
+  }
+  .hud__right {
+    position: fixed; top: 16px; right: 16px;
+    pointer-events: auto;
+  }
+
   &__molecules {
     position: fixed;
     top: 16px;

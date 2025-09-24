@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { AutoTooltipDirective } from '../auto-tooltip.directive'; // NEW: importa la directiva
+import { AutoTooltipDirective } from '../auto-tooltip.directive';
 
 export interface SidebarItem {
   id: string;
@@ -16,7 +16,7 @@ const STORAGE_KEY = 'sidebar.collapsed';
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,
-  imports: [CommonModule, TranslateModule, AutoTooltipDirective], // NEW
+  imports: [CommonModule, TranslateModule, AutoTooltipDirective],
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
 })
