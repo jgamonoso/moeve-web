@@ -1,4 +1,12 @@
-import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  inject,
+  Input,
+  NgZone,
+  OnDestroy,
+} from '@angular/core';
 
 /**
  * Añade automáticamente el atributo `title` si el contenido del host
@@ -16,7 +24,8 @@ export class AutoTooltipDirective implements AfterViewInit, OnDestroy {
   private ro?: ResizeObserver;
   private mo?: MutationObserver;
 
-  constructor(private el: ElementRef<HTMLElement>, private zone: NgZone) {}
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly zone = inject(NgZone);
 
   ngAfterViewInit(): void {
     // Observa cambios de tamaño
@@ -26,7 +35,11 @@ export class AutoTooltipDirective implements AfterViewInit, OnDestroy {
 
       // Observa cambios en el contenido (traducciones, etc.)
       this.mo = new MutationObserver(() => this.update());
-      this.mo.observe(this.el.nativeElement, { childList: true, characterData: true, subtree: true });
+      this.mo.observe(this.el.nativeElement, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
 
       // Primer cálculo
       requestAnimationFrame(() => this.update());

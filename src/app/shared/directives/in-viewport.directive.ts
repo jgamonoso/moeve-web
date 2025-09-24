@@ -1,10 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[appInViewport]'
+  selector: '[appInViewport]',
 })
-export class InViewportDirective {
-
-  constructor() { }
-
-}
+export class InViewportDirective {}

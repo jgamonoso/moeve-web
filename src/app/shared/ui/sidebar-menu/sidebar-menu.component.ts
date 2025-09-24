@@ -5,13 +5,10 @@ import { AutoTooltipDirective } from '../auto-tooltip.directive';
 
 export interface SidebarItem {
   id: string;
-  titleKey: string;  // clave i18n: p.e. 'menu.welcome'
-  icon: string;      // nombre de Material Icon (ligature), p.e. 'waving_hand'
+  titleKey: string; // clave i18n: p.e. 'menu.welcome'
+  icon: string; // nombre de Material Icon (ligature), p.e. 'waving_hand'
   disabled?: boolean;
 }
-
-// OJO: dejamos la constante por si la usabas en otro sitio, pero ya no la usamos aquí.
-const STORAGE_KEY = 'sidebar.collapsed';
 
 @Component({
   selector: 'app-sidebar-menu',

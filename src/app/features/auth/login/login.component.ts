@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { LocalFlagsService } from '../../../core/services/flags/local-flags.service';
 import { AuthService } from '../../../core/services/auth.service'; // 👈 importa AuthService
 
-type DemoUser = {
+interface DemoUser {
   id: 'empleado1' | 'empleado2';
   label: string;
   dataset: 'user1' | 'user2'; // 👈 dataset usado por los mocks
-};
+}
 
 const DEMO_USERS: DemoUser[] = [
   { id: 'empleado1', label: 'Empleado 1', dataset: 'user1' },
@@ -21,7 +21,7 @@ const DEMO_USERS: DemoUser[] = [
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
@@ -37,7 +37,9 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(2)]],
   });
 
-  get f() { return this.form.controls; }
+  get f() {
+    return this.form.controls;
+  }
 
   submit() {
     if (this.form.invalid) {
@@ -46,7 +48,7 @@ export class LoginComponent {
     }
     this.submitting.set(true);
 
-    const selected = this.users.find(u => u.id === this.f.userId.value)!;
+    const selected = this.users.find((u) => u.id === this.f.userId.value)!;
 
     // --- Fuente de verdad de identidad/dataset ---
     this.auth.loginDemo(selected.dataset); // 👈 aquí fijamos user1/user2

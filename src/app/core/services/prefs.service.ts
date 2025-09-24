@@ -1,14 +1,14 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 const KEY_LANG = 'lang';
 const ONBOARDING_KEY = 'onboardingDone';
 
 @Injectable({ providedIn: 'root' })
 export class PrefsService {
-  get lang(): 'es'|'en' {
-    return (localStorage.getItem(KEY_LANG) as 'es'|'en') || 'es'; // por defecto ES
+  get lang(): 'es' | 'en' {
+    return (localStorage.getItem(KEY_LANG) as 'es' | 'en') || 'es'; // por defecto ES
   }
-  set lang(v: 'es'|'en') {
+  set lang(v: 'es' | 'en') {
     localStorage.setItem(KEY_LANG, v);
   }
 

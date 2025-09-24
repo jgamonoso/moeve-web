@@ -1,5 +1,12 @@
 import {
-  AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, inject,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
@@ -14,19 +21,22 @@ gsap.registerPlugin(ScrollTrigger);
   styleUrls: ['./hope-moment.component.scss'],
 })
 export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('videoIntro',   { static: true }) videoIntroRef!: ElementRef<HTMLVideoElement>;
-  @ViewChild('introSection', { static: true }) introSectionRef!: ElementRef<HTMLElement>;
+  @ViewChild('videoIntro', { static: true })
+  videoIntroRef!: ElementRef<HTMLVideoElement>;
+  @ViewChild('introSection', { static: true })
+  introSectionRef!: ElementRef<HTMLElement>;
 
-  @ViewChild('videoScrub',   { static: true }) videoScrubRef!: ElementRef<HTMLVideoElement>;
-  @ViewChild('scrubSection', { static: true }) scrubSectionRef!: ElementRef<HTMLElement>;
+  @ViewChild('videoScrub', { static: true })
+  videoScrubRef!: ElementRef<HTMLVideoElement>;
+  @ViewChild('scrubSection', { static: true })
+  scrubSectionRef!: ElementRef<HTMLElement>;
 
   scrubReady = false;
   scrubSrc = 'assets/videos/hope-moment2-1280-910.mp4'; // valor por defecto
   private st?: ScrollTrigger;
-  private cleanupFns: Array<() => void> = [];
+  private cleanupFns: (() => void)[] = [];
   private router = inject(Router);
   private zone = inject(NgZone);
-
 
   ngOnInit(): void {
     // Elegimos vídeo en función del ancho de ventana
@@ -60,16 +70,24 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     };
     const events = ['pointerdown', 'keydown', 'touchstart'];
-    events.forEach(ev => window.addEventListener(ev, tryEnableAudio, { passive: true }));
-    this.cleanupFns.push(() => events.forEach(ev => window.removeEventListener(ev, tryEnableAudio)));
+    events.forEach((ev) =>
+      window.addEventListener(ev, tryEnableAudio, { passive: true }),
+    );
+    this.cleanupFns.push(() =>
+      events.forEach((ev) => window.removeEventListener(ev, tryEnableAudio)),
+    );
 
     // Al terminar el vídeo 1 -> pasamos al scrub
     const onEnded = () => {
       this.enableScrubSection();
-      this.scrubSectionRef.nativeElement.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+      this.scrubSectionRef.nativeElement.scrollIntoView({
+        behavior: 'instant' as ScrollBehavior,
+      });
     };
     videoIntro.addEventListener('ended', onEnded);
-    this.cleanupFns.push(() => videoIntro.removeEventListener('ended', onEnded));
+    this.cleanupFns.push(() =>
+      videoIntro.removeEventListener('ended', onEnded),
+    );
   }
 
   private pickScrubSrc(): string {
@@ -84,11 +102,17 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.scrubReady = true;
 
     this.zone.runOutsideAngular(() => {
-      const video = this.videoScrubRef.nativeElement;
+      const video = this.videoScrubRef.nativeElement as HTMLVideoElement & {
+        fastSeek?: (t: number) => void;
+      };
       const section = this.scrubSectionRef.nativeElement;
 
       const setup = () => {
-        try { video.pause(); } catch {}
+        try {
+          video.pause();
+        } catch {
+          /* noop */
+        }
         video.muted = true;
 
         const duration = Math.max(0.1, video.duration || 0.1);
@@ -97,17 +121,23 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
         const totalFrames = Math.round(duration * fps);
         // “16 px por frame” suele dar scroll largo y suave; ajusta entre 12–20 según sensaciones:
         const scrollDistance = totalFrames * 12;
-        console.log('scrollDistance:', scrollDistance)
+        console.log('scrollDistance:', scrollDistance);
 
         // Primado para Safari/iOS (mejora seeks)
-        const prime = () => video.play().then(() => video.pause()).catch(() => { /* ignore */ });
+        const prime = () =>
+          video
+            .play()
+            .then(() => video.pause())
+            .catch(() => {
+              /* noop */
+            });
 
         // Función de sync con fastSeek si existe
         const setTime = (t: number) => {
           // Clamp por seguridad
           const target = Math.max(0, Math.min(duration - eps, t));
-          if (typeof (video as any).fastSeek === 'function') {
-            (video as any).fastSeek(target);
+          if (typeof video.fastSeek === 'function') {
+            video.fastSeek(target);
           } else {
             video.currentTime = target;
           }
@@ -127,7 +157,7 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
           },
           onLeave: () => {
             this.zone.run(() => this.router.navigateByUrl('/landscape'));
-          }
+          },
         });
 
         this.st = st;
@@ -141,7 +171,9 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const onResize = () => ScrollTrigger.refresh();
       window.addEventListener('resize', onResize);
-      this.cleanupFns.push(() => window.removeEventListener('resize', onResize));
+      this.cleanupFns.push(() =>
+        window.removeEventListener('resize', onResize),
+      );
       this.cleanupFns.push(() => this.st?.kill());
     });
   }
@@ -151,6 +183,6 @@ export class HopeMomentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cleanupFns.forEach(fn => fn());
+    this.cleanupFns.forEach((fn) => fn());
   }
 }
