@@ -21,5 +21,12 @@
     "remaining": "remaining",
     "exit": "Sign out",
     "change_lang": "Change language"
+  },
+  "menu": {
+    "welcome": "Welcome to Moeve",
+    "culture": "Culture & belonging",
+    "itSetup": "Your role & business",
+    "benefits": "Your area & team",
+    "policies": "Essential tasks"
   }
 }

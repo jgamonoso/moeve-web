@@ -24,8 +24,8 @@
 
 /* Estado colapsado */
 .sidemenu--collapsed {
-  width: 72px;
-  min-width: 72px;
+  width: 90px;
+  min-width: 90px;
   padding: 12px;
   overflow: hidden;                         /* evita desbordes visuales */
 }
@@ -77,7 +77,11 @@
 
   &-icon { line-height: 1; opacity: .7; }
 }
-.sidemenu--collapsed .sidemenu__toggle { transform: rotate(180deg); }
+
+/* En colapsado, el toggle se alinea debajo del logo (a la izquierda) */
+.sidemenu--collapsed .sidemenu__toggle {
+  transform: rotate(180deg);
+}
 
 /* Middle: centra verticalmente el bloque de items */
 .sidemenu__middle {
@@ -91,16 +95,18 @@
 .sidemenu__nav {
   display: grid;
   gap: 8px;
-  margin: 0;
+  // margin: 0 0 0 0;
+  margin: 0px -10px 0px -10px;
 }
 
 /* Botón de item */
 .navitem {
   display: grid;
-  grid-template-columns: 24px 1fr 12px;
+  grid-template-columns: 24px 1fr;   /* icon | title */
   align-items: center;
   gap: 10px;
-  padding: 12px;
+  // padding: 12px 6px 12px 6px;
+  padding: 12px 12px 12px 12px;
   border-radius: 12px;
   background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.08);
@@ -129,7 +135,7 @@
 
   &__title {
     font-weight: 600;
-    letter-spacing: .2px;
+    // letter-spacing: .2px;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -145,12 +151,30 @@
   }
 }
 
+/* icono material */
+.navitem__icon {
+  font-size: 22px;           /* Material Symbols tamaño base */
+  line-height: 1;
+  display: inline-block;
+}
+
+/* título */
+.navitem__title {
+  font-weight: 600;
+  // letter-spacing: .2px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Ajustes en colapsado */
 .sidemenu--collapsed .navitem {
-  grid-template-columns: 24px 0fr 10px;     /* icon | (título 0fr) | dot */
+  grid-template-columns: 24px;   /* solo el icono visible */
   justify-items: center;
   padding: 10px;
   max-width: 75%;
+  margin-inline: auto;
 }
 
 /* Idioma y logout */
@@ -210,13 +234,31 @@
   clip: rect(0 0 0 0);
 }
 
-/* Responsivo básico (opcional) */
+/* =========================
+   Responsivo (revisado)
+   ========================= */
+
+/* En ≤1040px: solo ajusta a 200px si NO está colapsado.
+   Si está colapsado, respeta los 90px. */
 @media (max-width: 1040px) {
-  .sidemenu { width: 200px; }
+  .sidemenu:not(.sidemenu--collapsed) {
+    width: 200px;
+  }
 }
+
+/* En ≤860px:
+   - Si NO está colapsado: que “respire” (left/right 8px) y se autoajuste de ancho.
+   - Si está colapsado: mantenlo compacto a 90px y anclado a la izquierda. */
 @media (max-width: 860px) {
-  .sidemenu {
-    left: 8px; right: 8px; width: auto;
-    grid-template-rows: auto auto 1fr auto; /* cabecera | middle | lang | logout */
+  .sidemenu:not(.sidemenu--collapsed) {
+    left: 8px;
+    right: auto;
+    // width: 200px;  ← ya lo hereda del estilo base */
+  }
+  .sidemenu.sidemenu--collapsed {
+    left: 8px;
+    right: auto;       /* evita que se estire */
+    width: 90px;       /* respeta el colapsado en móviles */
+    min-width: 90px;
   }
 }

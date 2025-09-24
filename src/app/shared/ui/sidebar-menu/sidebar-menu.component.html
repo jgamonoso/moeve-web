@@ -6,9 +6,9 @@
       <span class="brand__dot" *ngIf="collapsed">m</span>
     </button>
 
-    <!-- ⚠️ Renombrado para no chocar con Tailwind .collapse -->
+    <!-- Renombrado para no chocar con Tailwind .collapse -->
     <button class="sidemenu__toggle" type="button" aria-label="Cerrar/abrir menú" (click)="toggleCollapse()">
-      <span class="sidemenu__toggle-icon">{{ collapsed ? '›' : '‹' }}</span>
+      <span class="sidemenu__toggle-icon">{{ '‹' }}</span>
     </button>
   </div>
 
@@ -22,11 +22,16 @@
         *ngFor="let it of items"
         [class.navitem--disabled]="it.disabled"
         (click)="onItemClick(it)"
-        [attr.aria-label]="it.title"
+        [attr.aria-label]="(it.titleKey | translate)"
+        [attr.title]="collapsed ? (it.titleKey | translate) : null"
       >
-        <span class="navitem__icon">{{ it.icon || '•' }}</span>
-        <span class="navitem__title" [class.hide-when-collapsed]="collapsed">{{ it.title }}</span>
-        <span class="navitem__dot" [class.navitem__dot--done]="it.done"></span>
+        <span class="material-symbols-outlined navitem__icon">{{ it.icon }}</span>
+        <span
+          class="navitem__title"
+          [class.hide-when-collapsed]="collapsed"
+          [appAutoTooltip]="!collapsed ? (it.titleKey | translate) : null">
+          {{ it.titleKey | translate }}
+        </span>
       </button>
     </nav>
   </div>
@@ -34,9 +39,13 @@
   <!-- Idioma -->
   <div class="sidemenu__lang">
     <button type="button" class="langbtn" (click)="langClick.emit()"
-            [attr.aria-label]="'landscape.change_lang' | translate">
-      <span class="langbtn__icon" *ngIf="collapsed">🌐</span>
-      <span class="langbtn__label" [class.hide-when-collapsed]="collapsed">{{ lang }}</span>
+            [attr.aria-label]="'landscape.change_lang' | translate"
+            [attr.title]="collapsed ? (('landscape.change_lang' | translate) + ' ' + lang) : null">
+      <span class="langbtn__icon" *ngIf="collapsed">{{ lang }}</span>
+      <span class="langbtn__label" [class.hide-when-collapsed]="collapsed"
+            [appAutoTooltip]="!collapsed ? (('landscape.change_lang' | translate) + ' ' + lang) : null">
+        {{ lang }}
+      </span>
       <span class="langbtn__chev"  [class.hide-when-collapsed]="collapsed">▾</span>
     </button>
   </div>
@@ -44,9 +53,11 @@
   <!-- Cerrar sesión -->
   <div class="sidemenu__footer">
     <button type="button" class="logout" (click)="logoutClick.emit()"
-            [attr.aria-label]="'landscape.exit' | translate">
+            [attr.aria-label]="'landscape.exit' | translate"
+            [attr.title]="collapsed ? ('landscape.exit' | translate) : null">
       <span class="logout__icon"  *ngIf="collapsed">⎋</span>
-      <span class="logout__label" [class.hide-when-collapsed]="collapsed">
+      <span class="logout__label" [class.hide-when-collapsed]="collapsed"
+            [appAutoTooltip]="!collapsed ? ('landscape.exit' | translate) : null">
         {{ 'landscape.exit' | translate }}
       </span>
     </button>

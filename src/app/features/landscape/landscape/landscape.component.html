@@ -38,7 +38,7 @@
   <app-sidebar-menu
     #sideMenu
     [collapsed]="menuCollapsed"
-    (collapsedChange)="menuCollapsed = $event"
+    (collapsedChange)="onCollapsedChange($event)"
     [items]="menuItems"
     [lang]="lang.toUpperCase()"
     (itemClick)="onMenuItemClick($event)"

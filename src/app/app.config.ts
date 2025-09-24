@@ -40,7 +40,7 @@ export const appConfig: ApplicationConfig = {
       // useHttpBackend / enforceLoading -> opcional
     }),
 
-    // ⚠️ Añade explícitamente el provider de TranslateHttpLoader (evita "No provider for _TranslateHttpLoader")
+    // Añade explícitamente el provider de TranslateHttpLoader (evita "No provider for _TranslateHttpLoader")
     TranslateHttpLoader,
 
     // 2) Configura TranslateModule apuntando al loader existente

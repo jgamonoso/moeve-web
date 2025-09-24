@@ -1,26 +1,27 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { AutoTooltipDirective } from '../auto-tooltip.directive'; // NEW: importa la directiva
 
 export interface SidebarItem {
   id: string;
-  title: string;
-  icon?: string;         // nombre de icono o emoji temporal
-  done?: boolean;        // punto verde/azul según estado
+  titleKey: string;  // clave i18n: p.e. 'menu.welcome'
+  icon: string;      // nombre de Material Icon (ligature), p.e. 'waving_hand'
   disabled?: boolean;
 }
 
+// OJO: dejamos la constante por si la usabas en otro sitio, pero ya no la usamos aquí.
 const STORAGE_KEY = 'sidebar.collapsed';
 
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, AutoTooltipDirective], // NEW
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss'],
 })
 export class SidebarMenuComponent {
-  /** Estado visual (puede ser controlado desde fuera con [(collapsed)]) */
+  /** Estado visual (lo controla el padre con [collapsed] y (collapsedChange)) */
   @Input() collapsed = false;
   @Output() collapsedChange = new EventEmitter<boolean>();
 
@@ -38,22 +39,12 @@ export class SidebarMenuComponent {
   /** Logo abre home, lo exponemos por si se quiere manejar */
   @Output() brandClick = new EventEmitter<void>();
 
-  ngOnInit() {
-    // Restaurar estado si existe
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved !== null) {
-      this.collapsed = saved === '1';
-      this.collapsedChange.emit(this.collapsed);
-    }
-  }
-
   onItemClick(it: SidebarItem) {
     if (!it.disabled) this.itemClick.emit(it);
   }
 
   toggleCollapse() {
     this.collapsed = !this.collapsed;
-    localStorage.setItem(STORAGE_KEY, this.collapsed ? '1' : '0');
     this.collapsedChange.emit(this.collapsed);
   }
 }

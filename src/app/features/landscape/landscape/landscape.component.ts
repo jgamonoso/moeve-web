@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SidebarMenuComponent, SidebarItem } from '../../../shared/ui/sidebar-menu/sidebar-menu.component';
 
+const SIDEBAR_COLLAPSE_KEY = 'sidebar.collapsed';
+
 @Component({
   selector: 'app-landscape',
   standalone: true,
@@ -20,9 +22,6 @@ import { SidebarMenuComponent, SidebarItem } from '../../../shared/ui/sidebar-me
   imports: [CommonModule, TranslateModule, SidebarMenuComponent],
 })
 export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
-  // ⬇️ Eliminamos la ref antigua #sidebar que ya no existe
-  // @ViewChild('sidebar', { static: true }) sidebarRef!: ElementRef<HTMLElement>;
-
   // ✅ Refs reales para animaciones
   @ViewChild('sideMenu',  { static: true, read: ElementRef }) sideMenuRef!: ElementRef<HTMLElement>;
   @ViewChild('badgeBar',  { static: true }) badgeBarRef!: ElementRef<HTMLElement>;
@@ -49,7 +48,8 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private i18n = inject(TranslateService); // 👈 inyecta el servicio
 
-  menuCollapsed = false;
+  // ✅ El padre es la fuente de la verdad; inicializamos desde localStorage
+  menuCollapsed = (localStorage.getItem(SIDEBAR_COLLAPSE_KEY) === '1');
 
   constructor() {
     // Aplica el idioma almacenado (si existe) al cargar el componente
@@ -79,7 +79,6 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
     // ✅ Animación de entrada (de vuelta) usando los elementos reales
     this.zone.runOutsideAngular(() => {
       this.gsapCtx = gsap.context(() => {
-        // Preferimos animar el panel real .sidemenu (fixed)
         const sideMenuHost = this.sideMenuRef?.nativeElement;
         const sideMenuPanel = sideMenuHost?.querySelector?.('.sidemenu') as HTMLElement | null;
 
@@ -103,15 +102,32 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  // ✅ Persistimos cambios de colapsado y actualizamos el input
+  onCollapsedChange(v: boolean) {
+    this.menuCollapsed = v;
+    localStorage.setItem(SIDEBAR_COLLAPSE_KEY, v ? '1' : '0');
+  }
+
+  // Mapea id -> clave i18n y nombre de Material Icon
+  private readonly menuMap: Record<string, { key: string; icon: string }> = {
+    welcome:  { key: 'menu.welcome',  icon: 'waving_hand' },
+    culture:  { key: 'menu.culture',  icon: 'diversity_1' },
+    'it-setup': { key: 'menu.itSetup', icon: 'stacked_line_chart' }, // o 'work' según prefiráis
+    benefits: { key: 'menu.benefits', icon: 'groups' },
+    policies: { key: 'menu.policies', icon: 'checklist' }
+  };
+
   get menuItems(): SidebarItem[] {
-    // Puedes mapear según tus estaciones reales
-    return (this.stations || []).map(s => ({
-      id: s.id,
-      title: s.title,
-      icon: '∙',            // aquí luego podéis meter icono real por categoría
-      done: s.percent === 100,
-      disabled: false,
-    }));
+    // usa stations del mock, pero ignora su "title" y aplica i18n
+    return (this.stations || []).map(s => {
+      const map = this.menuMap[s.id] || { key: s.title ?? s.id, icon: 'radio_button_unchecked' };
+      return {
+        id: s.id,
+        titleKey: map.key,   // clave i18n
+        icon: map.icon,      // material icon (ligature)
+        disabled: false
+      };
+    });
   }
 
   onMenuItemClick(it: SidebarItem) {
@@ -150,7 +166,6 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // === Acciones UI ===
-
   openLangModal() {
     console.log('openLangModal clicked');
     const ref = this.dialog.open(ModalComponent, {

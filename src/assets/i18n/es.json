@@ -19,7 +19,14 @@
     "molecules_aria": "Moléculas conseguidas",
     "completed": "completado",
     "remaining": "restante",
-    "exit": "Salir",
+    "exit": "Cerrar sesión",
     "change_lang": "Cambiar idioma"
+  },
+  "menu": {
+    "welcome": "Bienvenida a Moeve",
+    "culture": "Cultura y pertenencia",
+    "itSetup": "Tu rol y negocio",
+    "benefits": "Tu área y equipo",
+    "policies": "Tareas esenciales"
   }
 }
