@@ -40,10 +40,10 @@
   <div class="sidemenu__lang">
     <button type="button" class="langbtn" (click)="langClick.emit()"
             [attr.aria-label]="'landscape.change_lang' | translate"
-            [attr.title]="collapsed ? (('landscape.change_lang' | translate) + ' ' + lang) : null">
+            [attr.title]="collapsed ? ('landscape.change_lang' | translate) : null">
       <span class="langbtn__icon" *ngIf="collapsed">{{ lang }}</span>
       <span class="langbtn__label" [class.hide-when-collapsed]="collapsed"
-            [appAutoTooltip]="!collapsed ? (('landscape.change_lang' | translate) + ' ' + lang) : null">
+            [appAutoTooltip]="!collapsed ? ('landscape.change_lang' | translate) : null">
         {{ lang }}
       </span>
       <span class="langbtn__chev"  [class.hide-when-collapsed]="collapsed">▾</span>

@@ -112,7 +112,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly menuMap: Record<string, { key: string; icon: string }> = {
     welcome:  { key: 'menu.welcome',  icon: 'waving_hand' },
     culture:  { key: 'menu.culture',  icon: 'diversity_1' },
-    'it-setup': { key: 'menu.itSetup', icon: 'stacked_line_chart' }, // o 'work' según prefiráis
+    itSetup:  { key: 'menu.itSetup', icon: 'stacked_line_chart' },
     benefits: { key: 'menu.benefits', icon: 'groups' },
     policies: { key: 'menu.policies', icon: 'checklist' }
   };

@@ -137,9 +137,3 @@ Si se quisiera saltar el hook porque se va con prisas:
 
 * **Arquitectura de componentes**: ver `Arquitectura_de_Componentes_para_Pre-Onboarding_Front_End 2.pptx`
 * **Flujos de usuario y pantallas Hi-Fi**: ver `Hi-Fi- Preboarding 2.0.pdf`
-
-
-## 📚 Probar rápido desde GitHub Codespaces
-   * Para desplegar en GitHub Codespaces:
-      * Botón Code → Create codespace.
-      * npm ci && npm run start -- --host 0.0.0.0 --port 4200
