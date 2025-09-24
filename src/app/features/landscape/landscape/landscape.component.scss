@@ -18,7 +18,8 @@
     position: fixed;
     inset: 0;
     /* por defecto: versión grande */
-    background: url("/assets/images/landscape1920-1080.png") center/cover no-repeat;
+    background: url("/assets/images/landscape1920-1080.png") center/cover
+      no-repeat;
     filter: saturate(1.02);
     z-index: 0;
   }
@@ -30,7 +31,6 @@
     background-image: url("/assets/images/landscape1518-1080.png");
   }
 }
-
 
 /* Glass cards */
 .glass {
@@ -47,11 +47,16 @@
   z-index: 2;
 
   .hud__center {
-    position: fixed; top: 16px; left: 75%; transform: translateX(-50%);
+    position: fixed;
+    top: 16px;
+    left: 70%;
+    transform: translateX(-50%);
     pointer-events: auto;
   }
   .hud__right {
-    position: fixed; top: 16px; right: 16px;
+    position: fixed;
+    top: 16px;
+    right: 16px;
     pointer-events: auto;
   }
 
@@ -236,7 +241,7 @@
     left: -8px;
     transform: translateX(-100%);
     opacity: 0.85;
-    color:#2b5bd6;
+    color: #2b5bd6;
   }
 }
 
