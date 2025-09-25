@@ -1,0 +1,36 @@
+<div class="station">
+  <aside class="station__sidebar">
+    <header class="sb__head">
+      <button class="sb__back" type="button" (click)="close()">← {{ 'station.back' | translate }}</button>
+      <div class="sb__title">{{ data.titleKey | translate }}</div>
+    </header>
+
+    <nav class="sb__nav">
+      <button
+        *ngFor="let m of data.modules; let i = index"
+        type="button"
+        class="sb__item"
+        [class.is-active]="i === selectedIndex()"
+        (click)="onSelectModule(i)">
+        <span class="sb__dot"></span>
+        <span class="sb__label">{{ m.titleKey | translate }}</span>
+      </button>
+    </nav>
+
+    <footer class="sb__footer">
+      <div class="sb__bar"><span class="sb__bar-fill" [style.width.%]="progressPct()"></span></div>
+      <div class="sb__bar-label">{{ progressPct() }}%</div>
+    </footer>
+  </aside>
+
+  <main class="station__content">
+    <ng-container *ngIf="current() as mod">
+      <ng-container [ngSwitch]="mod.kind">
+        <app-module-scroll     *ngSwitchCase="'scroll'" [module]="$any(mod)"></app-module-scroll>
+        <app-module-reveal     *ngSwitchCase="'reveal'" [module]="$any(mod)"></app-module-reveal>
+        <app-module-quiz       *ngSwitchCase="'quiz'"   [module]="$any(mod)"></app-module-quiz>
+        <app-module-true-false *ngSwitchCase="'tf'"     [module]="$any(mod)"></app-module-true-false>
+      </ng-container>
+    </ng-container>
+  </main>
+</div>

@@ -1,0 +1,48 @@
+{
+  "id": "benefits",
+  "titleKey": "station.benefits.title",
+  "modules": [
+    {
+      "id": "m1",
+      "kind": "scroll",
+      "titleKey": "station.benefits.m1.title",
+      "items": [
+        { "titleKey": "station.benefits.m1.i1.title", "bodyKey": "station.benefits.m1.i1.body" },
+        { "titleKey": "station.benefits.m1.i2.title", "bodyKey": "station.benefits.m1.i2.body" }
+      ]
+    },
+    {
+      "id": "m2",
+      "kind": "reveal",
+      "titleKey": "station.benefits.m2.title",
+      "cards": [
+        { "frontKey": "station.benefits.m2.c1.front", "backKey": "station.benefits.m2.c1.back" },
+        { "frontKey": "station.benefits.m2.c2.front", "backKey": "station.benefits.m2.c2.back" }
+      ]
+    },
+    {
+      "id": "m3",
+      "kind": "scroll",
+      "titleKey": "station.benefits.m3.title",
+      "items": [
+        { "titleKey": "station.benefits.m3.i1.title", "bodyKey": "station.benefits.m3.i1.body" }
+      ]
+    },
+    {
+      "id": "m4",
+      "kind": "quiz",
+      "titleKey": "station.benefits.m4.title",
+      "questions": [
+        {
+          "qKey": "station.benefits.m4.q1.q",
+          "optionsKeys": [
+            "station.benefits.m4.q1.a",
+            "station.benefits.m4.q1.b",
+            "station.benefits.m4.q1.c"
+          ],
+          "answer": 2
+        }
+      ]
+    }
+  ]
+}

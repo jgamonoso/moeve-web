@@ -1,0 +1,59 @@
+{
+  "id": "welcome",
+  "titleKey": "station.welcome.title",
+  "modules": [
+    {
+      "id": "m1",
+      "kind": "scroll",
+      "titleKey": "station.welcome.m1.title",
+      "items": [
+        { "titleKey": "station.welcome.m1.i1.title", "bodyKey": "station.welcome.m1.i1.body" },
+        { "titleKey": "station.welcome.m1.i2.title", "bodyKey": "station.welcome.m1.i2.body" }
+      ]
+    },
+    {
+      "id": "m2",
+      "kind": "reveal",
+      "titleKey": "station.welcome.m2.title",
+      "cards": [
+        { "frontKey": "station.welcome.m2.c1.front", "backKey": "station.welcome.m2.c1.back" },
+        { "frontKey": "station.welcome.m2.c2.front", "backKey": "station.welcome.m2.c2.back" },
+        { "frontKey": "station.welcome.m2.c3.front", "backKey": "station.welcome.m2.c3.back" }
+      ]
+    },
+    {
+      "id": "m3",
+      "kind": "scroll",
+      "titleKey": "station.welcome.m3.title",
+      "items": [
+        { "titleKey": "station.welcome.m3.i1.title", "bodyKey": "station.welcome.m3.i1.body" },
+        { "titleKey": "station.welcome.m3.i2.title", "bodyKey": "station.welcome.m3.i2.body" }
+      ]
+    },
+    {
+      "id": "m4",
+      "kind": "scroll",
+      "titleKey": "station.welcome.m4.title",
+      "items": [
+        { "titleKey": "station.welcome.m4.i1.title", "bodyKey": "station.welcome.m4.i1.body" },
+        { "titleKey": "station.welcome.m4.i2.title", "bodyKey": "station.welcome.m4.i2.body" }
+      ]
+    },
+    {
+      "id": "m5",
+      "kind": "quiz",
+      "titleKey": "station.welcome.m5.title",
+      "questions": [
+        {
+          "qKey": "station.welcome.m5.q1.q",
+          "optionsKeys": [
+            "station.welcome.m5.q1.a",
+            "station.welcome.m5.q1.b",
+            "station.welcome.m5.q1.c"
+          ],
+          "answer": 1
+        }
+      ]
+    }
+  ]
+}

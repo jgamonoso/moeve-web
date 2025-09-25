@@ -1,0 +1,33 @@
+{
+  "id": "policies",
+  "titleKey": "station.policies.title",
+  "modules": [
+    {
+      "id": "m1",
+      "kind": "scroll",
+      "titleKey": "station.policies.m1.title",
+      "items": [
+        { "titleKey": "station.policies.m1.i1.title", "bodyKey": "station.policies.m1.i1.body" },
+        { "titleKey": "station.policies.m1.i2.title", "bodyKey": "station.policies.m1.i2.body" }
+      ]
+    },
+    {
+      "id": "m2",
+      "kind": "scroll",
+      "titleKey": "station.policies.m2.title",
+      "items": [
+        { "titleKey": "station.policies.m2.i1.title", "bodyKey": "station.policies.m2.i1.body" },
+        { "titleKey": "station.policies.m2.i2.title", "bodyKey": "station.policies.m2.i2.body" }
+      ]
+    },
+    {
+      "id": "m3",
+      "kind": "tf",
+      "titleKey": "station.policies.m3.title",
+      "statements": [
+        { "textKey": "station.policies.m3.s1", "answer": true },
+        { "textKey": "station.policies.m3.s2", "answer": false }
+      ]
+    }
+  ]
+}
