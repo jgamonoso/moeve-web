@@ -1,0 +1,42 @@
+{
+  "id": "itSetup",
+  "titleKey": "station.itSetup.title",
+  "modules": [
+    {
+      "id": "m1",
+      "kind": "scroll",
+      "titleKey": "station.itSetup.m1.title",
+      "items": [
+        { "titleKey": "station.itSetup.m1.i1.title", "bodyKey": "station.itSetup.m1.i1.body" },
+        { "titleKey": "station.itSetup.m1.i2.title", "bodyKey": "station.itSetup.m1.i2.body" }
+      ]
+    },
+    {
+      "id": "m2",
+      "kind": "scroll",
+      "titleKey": "station.itSetup.m2.title",
+      "items": [
+        { "titleKey": "station.itSetup.m2.i1.title", "bodyKey": "station.itSetup.m2.i1.body" },
+        { "titleKey": "station.itSetup.m2.i2.title", "bodyKey": "station.itSetup.m2.i2.body" }
+      ]
+    },
+    {
+      "id": "m3",
+      "kind": "reveal",
+      "titleKey": "station.itSetup.m3.title",
+      "cards": [
+        { "frontKey": "station.itSetup.m3.c1.front", "backKey": "station.itSetup.m3.c1.back" },
+        { "frontKey": "station.itSetup.m3.c2.front", "backKey": "station.itSetup.m3.c2.back" }
+      ]
+    },
+    {
+      "id": "m4",
+      "kind": "tf",
+      "titleKey": "station.itSetup.m4.title",
+      "statements": [
+        { "textKey": "station.itSetup.m4.s1", "answer": true },
+        { "textKey": "station.itSetup.m4.s2", "answer": false }
+      ]
+    }
+  ]
+}
