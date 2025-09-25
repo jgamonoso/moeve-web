@@ -1,12 +1,50 @@
 {
-  "molecules": { "value": 2, "total": 5 },
-  "percent": 46,
-  "remainingMinutes": 75,
-  "profile": "empleado1",
-  "recommendation": { "nextStationId": "culture", "reason": "Contenido prioritario para nuevas incorporaciones" },
-  "stations": [
-    { "id":"welcome","title":"Bienvenida","percent":100,"completedModules":4,"totalModules":4,"durationMins":8,"suggestedOrder":1,"badges":[{"type":"priority","label":"Prioritario"}] },
-    { "id":"culture","title":"Cultura","percent":25,"completedModules":1,"totalModules":4,"durationMins":15,"suggestedOrder":2 },
-    { "id":"itSetup","title":"IT Setup","percent":0,"completedModules":0,"totalModules":3,"durationMins":12,"suggestedOrder":3 }
+  "id": "culture",
+  "titleKey": "station.culture.title",
+  "modules": [
+    {
+      "id": "m1",
+      "kind": "scroll",
+      "titleKey": "station.culture.m1.title",
+      "items": [
+        { "titleKey": "station.culture.m1.i1.title", "bodyKey": "station.culture.m1.i1.body" },
+        { "titleKey": "station.culture.m1.i2.title", "bodyKey": "station.culture.m1.i2.body" },
+        { "titleKey": "station.culture.m1.i3.title", "bodyKey": "station.culture.m1.i3.body" }
+      ]
+    },
+    {
+      "id": "m2",
+      "kind": "reveal",
+      "titleKey": "station.culture.m2.title",
+      "cards": [
+        { "frontKey": "station.culture.m2.c1.front", "backKey": "station.culture.m2.c1.back" },
+        { "frontKey": "station.culture.m2.c2.front", "backKey": "station.culture.m2.c2.back" }
+      ]
+    },
+    {
+      "id": "m3",
+      "kind": "scroll",
+      "titleKey": "station.culture.m3.title",
+      "items": [
+        { "titleKey": "station.culture.m3.i1.title", "bodyKey": "station.culture.m3.i1.body" },
+        { "titleKey": "station.culture.m3.i2.title", "bodyKey": "station.culture.m3.i2.body" }
+      ]
+    },
+    {
+      "id": "m4",
+      "kind": "quiz",
+      "titleKey": "station.culture.m4.title",
+      "questions": [
+        {
+          "qKey": "station.culture.m4.q1.q",
+          "optionsKeys": [
+            "station.culture.m4.q1.a",
+            "station.culture.m4.q1.b",
+            "station.culture.m4.q1.c"
+          ],
+          "answer": 0
+        }
+      ]
+    }
   ]
 }

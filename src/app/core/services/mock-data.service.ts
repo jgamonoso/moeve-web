@@ -17,7 +17,7 @@ export class MockDataService {
 
   getProgressForCurrentUser(): Observable<ProgressContext> {
     const dataset = this.resolveDataset();
-    const url = `assets/mocks/context-progress.${dataset}.json`; // 👈 cambiado
+    const url = `assets/mocks/context-progress.${dataset}.json`;
 
     return this.http.get<ProgressContext>(url).pipe(
       map(ctx => this.ensureExactlyFiveStations(ctx)),

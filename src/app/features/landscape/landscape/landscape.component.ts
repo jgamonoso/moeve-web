@@ -13,6 +13,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SidebarMenuComponent, SidebarItem } from '../../../shared/ui/sidebar-menu/sidebar-menu.component';
 import { AchievementProgressComponent } from '../../../shared/ui/achievement-progress/achievement-progress.component';
 import { CountdownProgressComponent } from '../../../shared/ui/countdown-progress/countdown-progress.component';
+import { StationModalComponent } from '../../station/station-modal/station-modal.component';
+import { HttpClient } from '@angular/common/http';
+import { StationData } from '../../station/models/station.models';
+import { StationService } from '../../station/services/station.service';
 
 const SIDEBAR_COLLAPSE_KEY = 'sidebar.collapsed';
 
@@ -37,6 +41,8 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   private dialog = inject(MatDialog);
   private prefs = inject(PrefsService);
   private mock = inject(MockDataService);
+  private stationService = inject(StationService);
+  private i18n = inject(TranslateService);
 
   // Estado con valor por defecto para evitar "undefined"
   progress: ProgressContext = {
@@ -48,12 +54,12 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   stations: StationSummary[] = [];
   lang: string = this.prefs.lang || 'es';
 
-  private i18n = inject(TranslateService); // 👈 inyecta el servicio
-
   // El padre es la fuente de la verdad; inicializamos desde localStorage
   menuCollapsed = (localStorage.getItem(SIDEBAR_COLLAPSE_KEY) === '1');
 
-  constructor() {
+  constructor(
+    private http: HttpClient
+  ) {
     // Aplica el idioma almacenado (si existe) al cargar el componente
     const current = this.prefs.lang || 'es';
     this.i18n.use(current);
@@ -135,6 +141,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onMenuItemClick(it: SidebarItem) {
+    console.log('landscape.component - onMenuItemClick - it:', it)
     const s = this.stations.find(x => x.id === it.id);
     if (s) this.openStation(s);
   }
@@ -193,8 +200,19 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openStation(station: StationSummary) {
-    // TODO: implementar navegación a detalle
-    console.log('openStation', station);
+    console.log('landscape.component - openStation() - station.id:', station.id )
+    this.stationService.loadStation(station.id).subscribe({
+      next: (data) => {
+        this.dialog.open(StationModalComponent, {
+          data,                               // tipado de StationData
+          panelClass: 'station-dialog',
+          // estas dos líneas evitan que el modal “se desplace” a la derecha
+          width: '96vw',
+          maxWidth: '96vw'
+        });
+      },
+      error: (e) => console.error('No se pudo cargar la estación', e)
+    });
   }
 
   logout() {

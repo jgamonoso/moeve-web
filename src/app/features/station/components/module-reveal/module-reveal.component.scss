@@ -1,0 +1,28 @@
+.mod--reveal {
+  .mod__head { margin: 0 0 16px; h2 { font: 800 20px/1.2 ui-sans-serif; } }
+
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 12px;
+  }
+  .card {
+    perspective: 900px;
+    position: relative; height: 140px; border: 0; background: transparent; cursor: pointer;
+
+    .card__face {
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      border: 1px solid rgba(15,23,42,.08);
+      border-radius: 14px;
+      backface-visibility: hidden;
+      box-shadow: 0 8px 18px rgba(2,8,23,.06);
+      padding: 12px;
+      font: 700 15px/1.2 ui-sans-serif;
+    }
+    .card__face--front { background: #0b3a46; color: #e6fffb; }
+    .card__face--back  { background: #ffffff; color: #0f172a; transform: rotateY(180deg); }
+
+    &:hover { transform: translateY(-1px); }
+    &.is-flipped .card__face--front { transform: rotateY(180deg); }
+    &.is-flipped .card__face--back  { transform: rotateY(360deg); }
+  }
+}

@@ -1,1 +1,12 @@
-<p>module-scroll works!</p>
+<article class="mod mod--scroll">
+  <header class="mod__head">
+    <h2>{{ module.titleKey | translate }}</h2>
+  </header>
+
+  <section class="scroll">
+    <div class="item" *ngFor="let it of module.items">
+      <h3 class="item__title">{{ it.titleKey | translate }}</h3>
+      <p class="item__body">{{ it.bodyKey | translate }}</p>
+    </div>
+  </section>
+</article>

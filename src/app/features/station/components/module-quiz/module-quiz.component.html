@@ -1,1 +1,17 @@
-<p>module-quiz works!</p>
+<article class="mod mod--quiz">
+  <header class="mod__head">
+    <h2>{{ module.titleKey | translate }}</h2>
+  </header>
+
+  <div class="q" *ngFor="let q of module.questions; let qi = index">
+    <div class="q__text">{{ q.qKey | translate }}</div>
+    <ul class="q__opts">
+      <li *ngFor="let opt of q.optionsKeys; let oi = index">
+        <label class="opt">
+          <input type="radio" [name]="'q'+qi" [value]="oi">
+          <span>{{ opt | translate }}</span>
+        </label>
+      </li>
+    </ul>
+  </div>
+</article>

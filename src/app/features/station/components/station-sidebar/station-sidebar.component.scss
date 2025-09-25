@@ -1,0 +1,37 @@
+:host { display: block; }
+
+.ssb { display: grid; grid-template-rows: auto 1fr; height: 100%; }
+.ssb__header { padding: 16px 14px; }
+.ssb__title { margin: 0; font-weight: 800; font-size: 16px; }
+
+.ssb__nav {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  overflow: auto;
+}
+
+.ssb__item {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1px solid rgba(15,23,42,.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+
+  &:hover { background: #f8fafc; border-color: rgba(15,23,42,.16); }
+  &.is-active { border-color: #004453; box-shadow: 0 0 0 2px rgba(0,68,83,.08) inset; }
+}
+
+.ssb__dot {
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #7aa6ff; opacity: .6;
+}
+
+.ssb__label { font-weight: 600; }

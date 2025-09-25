@@ -1,1 +1,12 @@
-<p>module-reveal works!</p>
+<article class="mod mod--reveal">
+  <header class="mod__head">
+    <h2>{{ module.titleKey | translate }}</h2>
+  </header>
+
+  <div class="cards">
+    <button class="card" *ngFor="let c of module.cards">
+      <div class="card__face card__face--front">{{ c.frontKey | translate }}</div>
+      <div class="card__face card__face--back">{{ c.backKey | translate }}</div>
+    </button>
+  </div>
+</article>

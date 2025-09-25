@@ -1,1 +1,13 @@
-<p>module-true-false works!</p>
+<article class="mod mod--tf">
+  <header class="mod__head">
+    <h2>{{ module.titleKey | translate }}</h2>
+  </header>
+
+  <div class="tf" *ngFor="let s of module.statements; let i = index">
+    <div class="tf__text">{{ s.textKey | translate }}</div>
+    <div class="tf__actions">
+      <button type="button" class="btn"> {{ 'common.true'  | translate }} </button>
+      <button type="button" class="btn"> {{ 'common.false' | translate }} </button>
+    </div>
+  </div>
+</article>

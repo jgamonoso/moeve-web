@@ -33,5 +33,125 @@
     "molecules_reached": "Accumulated energy",
     "remaining_time": "Time remaining",
     "min": "min"
+  },
+  "station": {
+    "welcome": {
+      "title": "Welcome",
+      "m1": {
+        "title": "Introduction",
+        "i1": { "title": "Hello!", "body": "We’re glad you’re here. This module guides your first steps." },
+        "i2": { "title": "Goal", "body": "Get to know the key resources and what to expect this week." }
+      },
+      "m2": {
+        "title": "Company at a glance",
+        "c1": { "front": "Mission", "back": "Create experiences that simplify working life." },
+        "c2": { "front": "Vision", "back": "Be a reference in culture, product and employee experience." },
+        "c3": { "front": "Values", "back": "Collaboration, transparency and impact focus." }
+      },
+      "m3": {
+        "title": "Your first week",
+        "i1": { "title": "Day 1", "body": "IT onboarding, tool access and welcome meeting." },
+        "i2": { "title": "Day 2–5", "body": "Team rotations, shadowing and first objectives." }
+      },
+      "m4": {
+        "title": "Points of contact",
+        "i1": { "title": "Buddy", "body": "They’ll help you during your first weeks." },
+        "i2": { "title": "Manager", "body": "Sets short-term goals and unblocks context." }
+      },
+      "m5": {
+        "title": "Review quiz",
+        "q1": { "q": "Who’s best for day-to-day questions?", "a": "CEO", "b": "Your Buddy", "c": "External resources" }
+      }
+    },
+    "culture": {
+      "title": "Culture & belonging",
+      "m1": {
+        "title": "How we work",
+        "i1": { "title": "Collaboration", "body": "Shared decisions and open communication." },
+        "i2": { "title": "Transparency", "body": "We share context and data for better decisions." },
+        "i3": { "title": "Impact", "body": "We prioritize by user and business value." }
+      },
+      "m2": {
+        "title": "Stories & rituals",
+        "c1": { "front": "All-hands", "back": "Monthly alignment and celebration." },
+        "c2": { "front": "Demos", "back": "Fortnightly sessions to share product progress." }
+      },
+      "m3": {
+        "title": "Communities (ERGs)",
+        "i1": { "title": "Tech Guilds", "body": "Spaces to share practices and tools." },
+        "i2": { "title": "Wellbeing", "body": "Activities focused on health and balance." }
+      },
+      "m4": {
+        "title": "Quick quiz",
+        "q1": { "q": "Which value do we prioritize?", "a": "Hierarchy", "b": "Impact", "c": "Report aesthetics" }
+      }
+    },
+    "itSetup": {
+      "title": "IT setup",
+      "m1": {
+        "title": "Key tools",
+        "i1": { "title": "Mail & calendar", "body": "Set your corporate account and timezone." },
+        "i2": { "title": "Chat & repos", "body": "Access Slack/Teams and code repositories." }
+      },
+      "m2": {
+        "title": "Security",
+        "i1": { "title": "2FA", "body": "Enable 2-factor on all supported apps." },
+        "i2": { "title": "Device", "body": "Keep OS updated and encrypt the disk." }
+      },
+      "m3": {
+        "title": "Processes",
+        "c1": { "front": "IT support", "back": "Open tickets in the portal and attach screenshots." },
+        "c2": { "front": "Backups", "back": "Use the secure folder for sensitive docs." }
+      },
+      "m4": {
+        "title": "True/False",
+        "s1": "I must enable 2FA on corporate email.",
+        "s2": "Disk encryption on the laptop is optional."
+      }
+    },
+    "benefits": {
+      "title": "Benefits",
+      "m1": {
+        "title": "Compensation & perks",
+        "i1": { "title": "Salary & bonus", "body": "Annual reviews and goal-based bonus." },
+        "i2": { "title": "Learning", "body": "Yearly budget for courses and certifications." }
+      },
+      "m2": {
+        "title": "Time off",
+        "c1": { "front": "Vacation", "back": "Plan your days with your team." },
+        "c2": { "front": "Flexibility", "back": "Remote/hybrid options depending on role." }
+      },
+      "m3": {
+        "title": "Contacts",
+        "i1": { "title": "People", "body": "Reach out to HR for payroll or benefits." }
+      },
+      "m4": {
+        "title": "Quiz",
+        "q1": { "q": "Where do you check remaining days?", "a": "A local spreadsheet", "b": "IT support", "c": "HR portal" }
+      }
+    },
+    "policies": {
+      "title": "Policies",
+      "m1": {
+        "title": "Code of conduct",
+        "i1": { "title": "Respect", "body": "Zero tolerance for discriminatory behavior." },
+        "i2": { "title": "Conflicts of interest", "body": "Declare them transparently." }
+      },
+      "m2": {
+        "title": "Privacy & data",
+        "i1": { "title": "Personal data", "body": "We process only what’s necessary with legal basis." },
+        "i2": { "title": "Classification", "body": "Label and protect sensitive info." }
+      },
+      "m3": {
+        "title": "True/False",
+        "s1": "I must label sensitive information according to policy.",
+        "s2": "I can share personal data without legal basis."
+      }
+    },
+    "back": "Go back"
+  },
+  "common": {
+    "true": "True",
+    "false": "False"
   }
 }

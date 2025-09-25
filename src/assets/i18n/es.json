@@ -33,5 +33,125 @@
     "molecules_reached": "Energía acumulada",
     "remaining_time": "Tiempo restante",
     "min": "min"
+  },
+  "station": {
+    "welcome": {
+      "title": "Welcome",
+      "m1": {
+        "title": "Introducción",
+        "i1": { "title": "Bienvenida", "body": "¡Nos alegra que estés aquí! Este módulo te guiará por los primeros pasos del preboarding." },
+        "i2": { "title": "Objetivo", "body": "Conocerás los recursos principales y qué esperar de tus primeros días." }
+      },
+      "m2": {
+        "title": "Nuestra compañía, de un vistazo",
+        "c1": { "front": "Misión", "back": "Crear experiencias que simplifican la vida de las personas trabajadoras." },
+        "c2": { "front": "Visión", "back": "Ser referente en cultura, producto y experiencia de empleado." },
+        "c3": { "front": "Valores", "back": "Colaboración, transparencia y foco en el impacto." }
+      },
+      "m3": {
+        "title": "Tu primera semana",
+        "i1": { "title": "Día 1", "body": "Onboarding de IT, acceso a herramientas y reunión de bienvenida." },
+        "i2": { "title": "Día 2–5", "body": "Recorridos por equipos, shadowing y primeros objetivos." }
+      },
+      "m4": {
+        "title": "Personas de contacto",
+        "i1": { "title": "Buddy", "body": "Te acompañará en tus primeras semanas. Escríbele para dudas del día a día." },
+        "i2": { "title": "Manager", "body": "Definirá objetivos de corto plazo y resolverá bloqueos de contexto." }
+      },
+      "m5": {
+        "title": "Quiz de repaso",
+        "q1": { "q": "¿Quién es la mejor persona para dudas del día a día?", "a": "CEO", "b": "Tu Buddy", "c": "Recursos Externos" }
+      }
+    },
+    "culture": {
+      "title": "Cultura y pertenencia",
+      "m1": {
+        "title": "Cómo trabajamos",
+        "i1": { "title": "Colaboración", "body": "Promovemos decisiones compartidas y comunicación abierta." },
+        "i2": { "title": "Transparencia", "body": "Compartimos contexto y datos para que todos puedan decidir mejor." },
+        "i3": { "title": "Impacto", "body": "Priorizamos iniciativas por valor entregado a usuario y negocio." }
+      },
+      "m2": {
+        "title": "Historias y rituales",
+        "c1": { "front": "All-hands", "back": "Reunión mensual para alinear prioridades y celebrar logros." },
+        "c2": { "front": "Demos", "back": "Sesiones quincenales para mostrar avances de producto." }
+      },
+      "m3": {
+        "title": "Comunidades (ERGs)",
+        "i1": { "title": "Tech Guilds", "body": "Espacios para compartir prácticas y herramientas." },
+        "i2": { "title": "Wellbeing", "body": "Actividades enfocadas a salud y equilibrio." }
+      },
+      "m4": {
+        "title": "Quiz rápido",
+        "q1": { "q": "¿Qué valor priorizamos al decidir?", "a": "Jerarquía", "b": "Impacto", "c": "Estética del reporte" }
+      }
+    },
+    "itSetup": {
+      "title": "IT setup",
+      "m1": {
+        "title": "Herramientas clave",
+        "i1": { "title": "Correo y calendario", "body": "Configura tu cuenta corporativa y zona horaria." },
+        "i2": { "title": "Chat y repos", "body": "Accede a Slack/Teams y a los repositorios de código." }
+      },
+      "m2": {
+        "title": "Seguridad",
+        "i1": { "title": "2FA", "body": "Activa doble factor en todas las aplicaciones soportadas." },
+        "i2": { "title": "Dispositivo", "body": "Mantén el SO actualizado y cifra el disco." }
+      },
+      "m3": {
+        "title": "Procesos",
+        "c1": { "front": "Soporte IT", "back": "Abre tickets en el portal y adjunta capturas." },
+        "c2": { "front": "Backups", "back": "Usa la carpeta segura para documentos sensibles." }
+      },
+      "m4": {
+        "title": "Verdadero o falso",
+        "s1": "¿Debo activar 2FA en el correo corporativo?",
+        "s2": "¿Es opcional cifrar el disco del portátil?"
+      }
+    },
+    "benefits": {
+      "title": "Beneficios",
+      "m1": {
+        "title": "Compensación y perks",
+        "i1": { "title": "Salario y bonus", "body": "Revisiones anuales y bonus ligados a objetivos." },
+        "i2": { "title": "Formación", "body": "Crédito anual para clases, cursos y certificaciones." }
+      },
+      "m2": {
+        "title": "Tiempo libre",
+        "c1": { "front": "Vacaciones", "back": "Disfruta de tus días planificando con tu equipo." },
+        "c2": { "front": "Flexibilidad", "back": "Opciones de remoto e híbrido según rol." }
+      },
+      "m3": {
+        "title": "Contactos",
+        "i1": { "title": "People", "body": "Escribe a RRHH para dudas sobre nómina o beneficios." }
+      },
+      "m4": {
+        "title": "Quiz",
+        "q1": { "q": "¿Dónde consultas tus días pendientes?", "a": "En un Excel local", "b": "Preguntando en soporte IT", "c": "En el portal de RRHH" }
+      }
+    },
+    "policies": {
+      "title": "Políticas",
+      "m1": {
+        "title": "Código de conducta",
+        "i1": { "title": "Respeto", "body": "Cero tolerancia a comportamientos discriminatorios." },
+        "i2": { "title": "Conflictos de interés", "body": "Decláralos de forma transparente." }
+      },
+      "m2": {
+        "title": "Privacidad y datos",
+        "i1": { "title": "Datos personales", "body": "Procesamos solo lo necesario y con base legal." },
+        "i2": { "title": "Clasificación", "body": "Etiqueta y protege información sensible." }
+      },
+      "m3": {
+        "title": "Verdadero o falso",
+        "s1": "¿Debo etiquetar información sensible según la política?",
+        "s2": "¿Puedo compartir datos personales sin base legal?"
+      }
+    },
+    "back": "Volver atrás"
+  },
+  "common": {
+    "true": "Verdadero",
+    "false": "Falso"
   }
 }

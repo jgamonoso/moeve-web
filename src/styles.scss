@@ -37,3 +37,28 @@ body {
   color: #0f172a;
   border: 1px solid rgba(255,255,255,.1);
 }
+
+.station-dialog.cdk-overlay-pane {
+  max-width: none !important;
+  width: 96vw !important;     /* o 100vw si lo quieres a pantalla completa */
+}
+
+.station-dialog .mat-mdc-dialog-container {
+  width: 100% !important;
+  height: 90vh !important;    /* a juego con tu surface */
+}
+
+.station-dialog .mdc-dialog__surface {
+  width: 96vw !important;
+  max-width: 96vw !important;
+  height: 90vh !important;
+  max-height: 90vh !important;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Opcional: responsive */
+@media (max-width: 768px) {
+  .station-dialog.cdk-overlay-pane { width: 100vw !important; }
+  .station-dialog .mdc-dialog__surface { width: 100vw !important; height: 100vh !important; }
+}

@@ -1,1 +1,17 @@
-<p>station-sidebar works!</p>
+<div class="ssb">
+  <div class="ssb__header">
+    <h3 class="ssb__title">{{ title }}</h3>
+  </div>
+
+  <nav class="ssb__nav" aria-label="Módulos de la estación">
+    <button
+      type="button"
+      class="ssb__item"
+      *ngFor="let m of modules; let i = index"
+      [class.is-active]="i === activeIndex"
+      (click)="select(i)">
+      <span class="ssb__dot" aria-hidden="true"></span>
+      <span class="ssb__label">{{ m.title }}</span>
+    </button>
+  </nav>
+</div>
