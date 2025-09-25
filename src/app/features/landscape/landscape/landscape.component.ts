@@ -15,7 +15,6 @@ import { AchievementProgressComponent } from '../../../shared/ui/achievement-pro
 import { CountdownProgressComponent } from '../../../shared/ui/countdown-progress/countdown-progress.component';
 import { StationModalComponent } from '../../station/station-modal/station-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { StationData } from '../../station/models/station.models';
 import { StationService } from '../../station/services/station.service';
 
 const SIDEBAR_COLLAPSE_KEY = 'sidebar.collapsed';
@@ -43,6 +42,7 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   private mock = inject(MockDataService);
   private stationService = inject(StationService);
   private i18n = inject(TranslateService);
+  private http = inject(HttpClient);
 
   // Estado con valor por defecto para evitar "undefined"
   progress: ProgressContext = {
@@ -58,7 +58,6 @@ export class LandscapeComponent implements OnInit, AfterViewInit, OnDestroy {
   menuCollapsed = (localStorage.getItem(SIDEBAR_COLLAPSE_KEY) === '1');
 
   constructor(
-    private http: HttpClient
   ) {
     // Aplica el idioma almacenado (si existe) al cargar el componente
     const current = this.prefs.lang || 'es';

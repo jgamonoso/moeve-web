@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { LocalFlagsService } from '../../../core/services/flags/local-flags.service';
 import { AuthService } from '../../../core/services/auth.service';
 
-type DemoUser = {
+interface DemoUser {
   id: 'empleado1' | 'empleado2';
   label: string;
   dataset: 'user1' | 'user2'; // dataset usado por los mocks

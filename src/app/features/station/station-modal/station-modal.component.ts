@@ -1,4 +1,4 @@
-import { Component, Inject, computed, signal } from '@angular/core';
+import { Component, computed, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,10 +27,8 @@ import { ModuleTrueFalseComponent } from '../components/module-true-false/module
   styleUrls: ['./station-modal.component.scss'],
 })
 export class StationModalComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: StationData,
-    private dialogRef: MatDialogRef<StationModalComponent>
-  ) {}
+  public data = inject<StationData>(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef<StationModalComponent>);
 
   /** índice del módulo activo (0..n-1) */
   selectedIndex = signal(0);
@@ -43,6 +41,7 @@ export class StationModalComponent {
     const list = this.modules();
     const i = this.selectedIndex();
     return i >= 0 && i < list.length ? list[i] : null;
+    // nota: en plantilla usamos $any(mod) para evitar choques de tipos
   });
 
   /** progreso simple: % basado en el índice seleccionado */

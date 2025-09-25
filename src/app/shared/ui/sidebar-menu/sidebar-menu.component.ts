@@ -10,9 +10,6 @@ export interface SidebarItem {
   disabled?: boolean;
 }
 
-// OJO: dejamos la constante por si la usabas en otro sitio, pero ya no la usamos aquí.
-const STORAGE_KEY = 'sidebar.collapsed';
-
 @Component({
   selector: 'app-sidebar-menu',
   standalone: true,
